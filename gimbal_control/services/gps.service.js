@@ -10,7 +10,7 @@ class GpsService {
     constructor() {
         // THIS MIGHT NOT WORK WHEN RUNNING START.BAT!!!
         // FIX THIS PART
-        this.udpReader = spawn("node", ["udpReader.js"], {
+        this.udpReader = spawn("node", ["./gimbal_control/builders/udpReader.js"], {
             stdio: "inherit"
         });
 
@@ -60,7 +60,7 @@ class GpsService {
 
     async p5Point(startLat, startLon, startEl, targetCallsign, cameraPoint){
         // get data from p5 json file
-        const file= "../src/data/p5_aircraft.json";
+        const file= "./gimbal_control/data/p5_aircraft.json";
         
         try {
             // read JSON from file
@@ -98,7 +98,7 @@ class GpsService {
     }
 
     async getP5Aircraft() {
-        const text = await readFile("../src/data/p5_aircraft.json", "utf8");
+        const text = await readFile("./gimbal_control/data/p5_aircraft.json", "utf8");
         return JSON.parse(text);
     }
 

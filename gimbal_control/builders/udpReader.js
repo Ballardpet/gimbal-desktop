@@ -19,9 +19,11 @@ import path from "path";
 // conversion from ecef to gps
 import projector from "ecef-projector";
 
+console.log("Current working directory:", process.cwd());
+
 // JSON file locations
-const JSON_FILE = "data/p5_aircraft.json";
-const TEMP_FILE = "data/p5_aircraft.tmp";
+const JSON_FILE = "./gimbal_control/data/p5_aircraft.json";
+const TEMP_FILE = "./gimbal_control/data/p5_aircraft.tmp";
 fs.mkdirSync("data", { recursive: true });
 
 const HOST = "0.0.0.0";
