@@ -9,7 +9,7 @@ class GpsService {
 
     constructor() {
         // THIS MIGHT NOT WORK WHEN RUNNING START.BAT!!!
-            // Gheehee nevermind
+        // FIX THIS PART
         this.udpReader = spawn("node", ["udpReader.js"], {
             stdio: "inherit"
         });

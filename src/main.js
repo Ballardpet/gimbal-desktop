@@ -4,10 +4,12 @@ import started from 'electron-squirrel-startup';
 import ManualService from '../gimbal_control/services/manual.service.js';
 import AzElService from "../gimbal_control/services/azEl.service.js";
 import DisplayService from "../gimbal_control/services/display.service.js"; //
+import GpsService from '../gimbal_control/services/gps.service.js';
 
 const manualService = new ManualService();
 const azElService = new AzElService();
 const displayservice = new DisplayService();
+const gpsService = new GpsService();
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -44,6 +46,8 @@ app.whenReady().then(() => {
   // I think this is where we add the services
   // This is basically the new controller I think
   // Then we also add to preload.js?
+
+  // Manual
   ipcMain.handle("manualMove", async (_, direction, speed) => {
     return manualService.manualMove(direction, speed);
   });
@@ -52,16 +56,35 @@ app.whenReady().then(() => {
     return manualService.stop();
   });
 
+  // AzEl
   ipcMain.handle("azElPoint", async (_, azimuth, elevation) => {
     return azElService.pointTo(azimuth, elevation);
   });
 
+  // Display
   ipcMain.handle("getAz", async () => {
     return displayservice.getAz();
   });
 
-   ipcMain.handle("getEl", async () => {
+  ipcMain.handle("getEl", async () => {
     return displayservice.getEl();
+  });
+
+  // GPS
+  ipcMain.handle("adsb", async (_, startLat, startLon, startEl, targetHexID, cameraPoint) => {
+    return gpsService.adsb(startLat, startLon, startEl, targetHexID, cameraPoint);
+  });
+
+  ipcMain.handle("p5Point", async (_, startLat, startLon, startEl, targetCallsign, cameraPoint) => {
+    return gpsService.p5Point(startLat, startLon, startEl, targetCallsign, cameraPoint);
+  });
+
+  ipcMain.handle("getP5Aircraft", async () => {
+    return gpsService.getP5Aircraft();
+  });
+
+  ipcMain.handle("pointTo", async (_, startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint) => {
+    return gpsService.pointTo(startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint);
   });
 
 
