@@ -2,8 +2,10 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import ManualService from '../gimbal_control/services/manual.service.js';
+import AzElService from "../gimbal_control/services/azEl.service.js";
 
 const manualService = new ManualService();
+const azElService = new AzElService();
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -46,6 +48,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle("manualStop", async () => {
     return manualService.stop();
+  });
+
+  ipcMain.handle("azElPoint", async (_, azimuth, elevation) => {
+    return azElService.pointTo(azimuth, elevation);
   });
 
 

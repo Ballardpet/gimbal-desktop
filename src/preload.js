@@ -8,4 +8,7 @@ contextBridge.exposeInMainWorld("api", {
 
     manualStop: () =>
         ipcRenderer.invoke("manualStop"),
+
+    azElPoint: (azimuth, elevation) =>
+        ipcRenderer.invoke("azElPoint", azimuth, elevation),
 });
