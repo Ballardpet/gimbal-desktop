@@ -1,6 +1,10 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
+import ManualService from '../gimbal_control/services/manual.service.js';
+
+const manualService = new ManualService();
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -32,6 +36,21 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
+  // I think this is where we add the services
+  // This is basically the new controller I think
+  // Then we also add to preload.js?
+  ipcMain.handle("manualMove", async (_, direction, speed) => {
+    return manualService.manualMove(direction, speed);
+  });
+
+  ipcMain.handle("manualStop", async () => {
+    return manualService.stop();
+  });
+
+
+
+
   createWindow();
 
   // On OS X it's common to re-create a window in the app when the
