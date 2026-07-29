@@ -1,12 +1,3 @@
-/*
-import React from 'react';
-
-export default function GPS() {
-    return (
-        <div>Put ALL the GPS stuff here</div>
-    )
-}
-*/
 import React, { useState, useRef, useEffect } from "react";
 
 export default function GPS(){
@@ -41,24 +32,7 @@ export default function GPS(){
 
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
-        /**
-        const res = await fetch("/api/gps/gpsPoint", { 
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                startLat: startLat,
-                startLon: startLon,
-                startEl: startEl,
-                destLat: destLat,
-                destLon: destLon,
-                destEl: destEl, 
-                cameraPoint: cameraPoint
-            }),
-        });
-        const data = await res.json(); */ ////////////////////////////////////////////////////////
-        
+
         const data = await window.api.gpsPoint(
             startLat,
             startLon,
@@ -85,22 +59,6 @@ export default function GPS(){
 
         while (loopRef.current === "adsb"){
             try {
-                /*
-                const res = await fetch("/api/gps/adsb", { //////////////////////////////////////////////////////////
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        startLat: startLat,
-                        startLon: startLon,
-                        startEl: startEl,
-                        targetHexID: target, 
-                        cameraPoint: cameraPoint
-                    }),
-                });
-                const data = await res.json(); //////////////////////////////////////////////////////////
-                */
                 const data = await window.api.adsb(
                     startLat,
                     startLon,
@@ -134,23 +92,6 @@ export default function GPS(){
 
         while (loopRef.current === "p5") {
             try {
-                /*
-                const res = await fetch("/api/gps/p5Point", { //////////////////////////////////////////////////////////
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        startLat,
-                        startLon,
-                        startEl,
-                        targetCallsign: p5Target,
-                        cameraPoint,
-                    }),
-                });
-
-                const data = await res.json(); //////////////////////////////////////////////////////////
-                */
                 const data = await window.api.p5Point(
                     startLat,
                     startLon,
@@ -175,9 +116,6 @@ export default function GPS(){
     // update display
     const loadP5Aircraft = async () => {
         try {
-            //const res = await fetch("/api/gps/p5Aircraft"); //////////////////////////////////////////////////////////
-            //const data = await res.json(); //////////////////////////////////////////////////////////
-
             const data = await window.api.getP5Aircraft();
 
             // Convert object into array
