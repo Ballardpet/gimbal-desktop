@@ -6,15 +6,60 @@ import AzElService from "../gimbal_control/services/azEl.service.js";
 import DisplayService from "../gimbal_control/services/display.service.js"; //
 import GpsService from '../gimbal_control/services/gps.service.js';
 
+// imports for spawning Dump1090 as a process
+import { spawn } from "child_process";
+
 const manualService = new ManualService();
 const azElService = new AzElService();
 const displayservice = new DisplayService();
 const gpsService = new GpsService();
 
+let dump1090Process = null;
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
+}
+
+function startDump1090() {
+
+    if (dump1090Process) {
+        console.log("Dump1090 already running.");
+        return;
+    }
+
+    const dump1090Path = path.join(
+        process.cwd(),
+        "Dump1090",
+        "dump1090.exe"
+    );
+
+    console.log("Starting Dump1090...");
+    console.log(dump1090Path);
+
+    dump1090Process = spawn(
+        dump1090Path,
+        //["--interactive", "--net"],
+        ["--net"],
+        {
+            windowsHide: false, //////////////// EVENTUALLY MAKE THIS TRUE SO WE DON'T SEE IT!!!
+            stdio: "ignore",
+        }
+    );
+
+    dump1090Process.stdout?.on("data", data => {
+        console.log("[Dump1090]", data.toString());
+    });
+
+    dump1090Process.stderr?.on("data", data => {
+        console.error("[Dump1090]", data.toString());
+    });
+
+    dump1090Process.on("close", code => {
+        console.log(`Dump1090 exited with code ${code}`);
+        dump1090Process = null;
+    });
 }
 
 const createWindow = () => {
@@ -46,6 +91,8 @@ app.whenReady().then(() => {
   // I think this is where we add the services
   // This is basically the new controller I think
   // Then we also add to preload.js?
+
+  startDump1090();
 
   // Manual
   ipcMain.handle("manualMove", async (_, direction, speed) => {
@@ -104,6 +151,11 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+  if (dump1090Process) {
+    dump1090Process.kill();
+  }
+
+  
   if (process.platform !== 'darwin') {
     app.quit();
   }
