@@ -3,9 +3,11 @@ import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import ManualService from '../gimbal_control/services/manual.service.js';
 import AzElService from "../gimbal_control/services/azEl.service.js";
+import DisplayService from "../gimbal_control/services/display.service.js"; //
 
 const manualService = new ManualService();
 const azElService = new AzElService();
+const displayservice = new DisplayService();
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -54,6 +56,13 @@ app.whenReady().then(() => {
     return azElService.pointTo(azimuth, elevation);
   });
 
+  ipcMain.handle("getAz", async () => {
+    return displayservice.getAz();
+  });
+
+   ipcMain.handle("getEl", async () => {
+    return displayservice.getEl();
+  });
 
 
 

@@ -11,4 +11,11 @@ contextBridge.exposeInMainWorld("api", {
 
     azElPoint: (azimuth, elevation) =>
         ipcRenderer.invoke("azElPoint", azimuth, elevation),
+
+    getAz: () => 
+        ipcRenderer.invoke("getAz"),
+
+    getEl: () => 
+        ipcRenderer.invoke("getEl"),
+
 });

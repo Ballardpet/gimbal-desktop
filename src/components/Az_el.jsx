@@ -1,14 +1,6 @@
-/*import React from 'react';
-
-export default function Az_el() {
-    return (
-        <div>Put the point-to stuff here</div>
-    )
-}
-*/
-
-// This will allow the user to input azimuth and elevation to point the gimbal towards
 import React, { useState, useRef } from "react";
+
+// Hmmm azel point only works after i enter numbers. even with 180 and 90 pre-loaded
 
 export default function Az_el(){
 
@@ -17,13 +9,14 @@ export default function Az_el(){
     
     const handleClick = async() => {
         console.log(azimuth, elevation)
-        const data = await window.api.azElPoint(azimuth, elevation);
+        const data = await window.api.azElPoint(azimuth, elevation); //
         console.log(data);
     }
 
     return (
         <section>
-            <h2>Point to Azimuth/Elevation: Default Points South</h2>
+            <div>Don't forget to center these!</div>
+            <h2 >Point to Azimuth/Elevation: Default Points South</h2>
             <label htmlFor="azimuth">Destination Azimuth,0 to 360.00: </label>
             <input type="text" id="azimuth" name = "azimuth" value={azimuth} onChange={(e) => setAzimuth(e.target.value)} />
             <br />
