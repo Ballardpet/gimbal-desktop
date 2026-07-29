@@ -8,7 +8,7 @@ import Display from './components/Display';
 import Az_el from './components/Az_el';
 import GPS from './components/GPS';
 
-import Manual_control from './components/fullyCopiedManual';
+//import Manual_control from './components/fullyCopiedManual';
 
 // GPS pointing stuff might all need to be in here. Idk how else I'd share
 // that information if I want gps point to be in one half and tracking to be in the other
@@ -22,7 +22,6 @@ const App = () => {
           <Manual_Control/>
           <Az_el/>
           <Display/>
-          <Manual_control/>
         </div>
         <div className="half right-side">
           <GPS/>

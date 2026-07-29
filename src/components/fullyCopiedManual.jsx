@@ -19,47 +19,15 @@ export default function Manual_control(){
         
         if (direction == "stop") {
             console.log("Gimbal stopped");
-
             const data = await window.api.manualStop();
-
             console.log(data);
-/*
-            const res = await fetch("/api/manual/manualStop", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    direction: direction
-                }),
-            });
 
-            const data = await res.json();
-            console.log(data);
-            */
         }
         else {
             const speed = document.getElementById("speed").value
-
             console.log("Direction clicked: ", direction, " At speed: ", speed);
-
             const data = await window.api.manualMove(direction, speed);
-
             console.log(data);
-/*
-            const res = await fetch("/api/manual/manualMove", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    direction: direction,
-                    speed: speed
-                }),
-            });
-
-            const data = await res.json();
-            console.log(data);*/
         }
     }
 
