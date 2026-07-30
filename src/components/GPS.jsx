@@ -15,10 +15,8 @@ export default function GPS(){
     // ADSB stuff
     const [target, setTarget] = useState("");
 
-    // used for the buttons
-    const [trackingMode, setTrackingMode] = useState(null); // null | "adsb" | "p5"
-    // used for the loop
-    const loopRef = useRef("none"); // "none" | "adsb" | "p5"
+    const [tracking, setTracking] = useState(false);
+    const trackingRef = useRef(false);
 
     const [targetLat, setTargetLat] = useState(0);
     const [targetLon, setTargetLon] = useState(0);
@@ -27,8 +25,7 @@ export default function GPS(){
     const [cameraPoint, setCameraPoint] = useState(false);
 
     // P5
-    const [p5Aircraft, setP5Aircraft] = useState([]);
-    const [p5Target, setP5Target] = useState("");      // P5 callsign
+    const [allAircraft, setAllAircraft] = useState([]);
 
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
@@ -46,20 +43,19 @@ export default function GPS(){
         console.log(data);
     }
 
-    const handleADSB = async() => {
-        // handle start/stop & adsb/p5
-        if (trackingMode === "adsb") {
-            loopRef.current = "none";
-            setTrackingMode(null);
+    const handleTracking = async () => {
+        if (trackingRef.current) {
+            trackingRef.current = false;
+            setTracking(false);
             return;
         }
 
-        loopRef.current = "adsb";
-        setTrackingMode("adsb");
+        trackingRef.current = true;
+        setTracking(true);
 
-        while (loopRef.current === "adsb"){
+        while (trackingRef.current) {
             try {
-                const data = await window.api.adsb(
+                const data = await window.api.gpsPoint(
                     startLat,
                     startLon,
                     startEl,
@@ -67,59 +63,27 @@ export default function GPS(){
                     cameraPoint
                 );
 
-                setTargetLat(data.lat);
-                setTargetLon(data.lon);
-                setTargetEl(data.el);
-            }
-            catch (err) {
-                console.error(err);
-            }
-            // Call api every second
-            await sleep (1000);
-        }
-    }
-
-    const handleP5 = async () => {
-        // handle start/stop & adsb/p5
-        if (trackingMode === "p5") {
-            loopRef.current = "none";
-            setTrackingMode(null);
-            return;
-        }
-
-        loopRef.current = "p5";
-        setTrackingMode("p5");
-
-        while (loopRef.current === "p5") {
-            try {
-                const data = await window.api.p5Point(
-                    startLat,
-                    startLon,
-                    startEl,
-                    p5Target,
-                    cameraPoint
-                );
-
-                setTargetLat(data.lat);
-                setTargetLon(data.lon);
-                setTargetEl(data.el);
+                if (data) {
+                    setTargetLat(data.lat);
+                    setTargetLon(data.lon);
+                    setTargetEl(data.el);
+                }
             }
             catch (err) {
                 console.error(err);
             }
 
-            // Update once per second
             await sleep(1000);
         }
     };
 
     // update display
-    const loadP5Aircraft = async () => {
+    const loadAllAircraft = async () => {
         try {
-            const data = await window.api.getP5Aircraft();
+            const data = await window.api.getAllAircraft();
 
             // Convert object into array
-            setP5Aircraft(Object.values(data));
+            setAllAircraft(Object.values(data));
         }
         catch (err) {
             console.error(err);
@@ -128,11 +92,18 @@ export default function GPS(){
 
     // update display
     useEffect(() => {
-        loadP5Aircraft();
+        loadAllAircraft();
 
-        const interval = setInterval(loadP5Aircraft, 1000);
+        const interval = setInterval(loadAllAircraft, 1000);
 
         return () => clearInterval(interval);
+    }, []);
+
+    // Maybe?
+    useEffect(() => {
+        return () => {
+            trackingRef.current = false;
+        };
     }, []);
     
     
@@ -165,63 +136,62 @@ export default function GPS(){
 
             <br />
 
-            <h2>Track ADS-B</h2>
-            <label htmlFor="target">Enter target hex code: </label>
-            <input type="text" id="target" name = "target" value={target} onChange={(e) => setTarget(e.target.value)} />
-            <div>Target Latitude: {targetLat} Target Longitue: {targetLon} Target Elevation: {targetEl}</div>
-            <button type="button" className="automated" onClick={handleADSB} style={{backgroundColor: trackingMode === "adsb" ? "red" : "green",color: "white"}}>{trackingMode === "adsb"? "Stop Tracking": "Start Tracking"}</button>
+            <h2>Track Aircraft</h2>
 
+            <label htmlFor="target">Selected Target: </label>
+                <input
+                    type="text"
+                    id="target"
+                    value={target}
+                    onChange={(e) => setTarget(e.target.value)}
+                />
+            
             <br />
 
-            <h2>Track P5</h2>
+            <div>Target Latitude: {targetLat ?? "--"} Target Longitude: {targetLon ?? "--"} Target Elevation: {targetEl ?? "--"}</div>
+            
+            <button
+                type="button"
+                className="automated"
+                onClick={handleTracking}
+                style={{
+                    backgroundColor: tracking ? "red" : "green",
+                    color: "white"
+                }}
+            >
+                {tracking ? "Stop Tracking" : "Start Tracking"}
+            </button>
+
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Callsign</th>
+                        <th>ID</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
                         <th>Altitude (m)</th>
+                        <th>Tracking Type</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {p5Aircraft.map((aircraft) => (
+                    {allAircraft.map((aircraft) => (
                         <tr
-                            key={aircraft.callsign}
-                            className={p5Target === aircraft.callsign ? "selected-aircraft" : ""}
-                            onClick={() => setP5Target(aircraft.callsign)}
+                            key={aircraft.id}
+                            className={target === aircraft.id ? "selected-aircraft" : ""}
+                            onClick={() => setTarget(aircraft.id)}
                             style={{ cursor: "pointer" }}
                         >
-                            <td>{aircraft.callsign}</td>
-                            <td>{aircraft.lat.toFixed(6)}</td>
-                            <td>{aircraft.lon.toFixed(6)}</td>
-                            <td>{aircraft.alt.toFixed(1)}</td>
+                            <td>{aircraft.id}</td>
+                            <td>{aircraft.lat?.toFixed(6) ?? "--"}</td>
+                            <td>{aircraft.lon?.toFixed(6) ?? "--"}</td>
+                            <td>{aircraft.alt?.toFixed(1) ?? "--"}</td>
+                            <td>{aircraft.trackingType}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            <label htmlFor="p5Target">Selected Callsign: </label>
-                <input
-                    type="text"
-                    id="p5Target"
-                    value={p5Target}
-                    onChange={(e) => setP5Target(e.target.value)}
-                />
             
-            <br />
-            
-            <button
-                type="button"
-                className="automated"
-                onClick={handleP5}
-                style={{
-                    backgroundColor: trackingMode === "p5" ? "red" : "green",
-                    color: "white"
-                }}
-            >
-                {trackingMode === "p5"? "Stop Tracking": "Start Tracking"}
-            </button>
 
         </section>
     )   
