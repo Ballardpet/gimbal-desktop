@@ -42,3 +42,23 @@ body {
   /*margin: 5px;*/
   cursor: pointer;
 }
+
+.aircraft-table {
+  width: 95%;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid black;
+}
+
+.aircraft-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.aircraft-table th {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}

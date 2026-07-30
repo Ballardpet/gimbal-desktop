@@ -172,40 +172,42 @@ export default function GPS(){
                 <option value="adsb">ADSB</option>
                 <option value="p5">P5</option>
             </select>
-
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                        <th>Altitude (m)</th>
-                        <th>Tracking Type</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {allAircraft
-                    .filter((aircraft) => 
-                        trackingFilter === "all" ||
-                        aircraft.trackingType?.toLowerCase() === trackingFilter
-                    )
-                    .map((aircraft) => (
-                        <tr
-                            key={aircraft.id}
-                            className={target === aircraft.id ? "selected-aircraft" : ""}
-                            onClick={() => setTarget(aircraft.id)}
-                            style={{ cursor: "pointer" }}
-                        >
-                            <td>{aircraft.id}</td>
-                            <td>{aircraft.lat?.toFixed(6) ?? "--"}</td>
-                            <td>{aircraft.lon?.toFixed(6) ?? "--"}</td>
-                            <td>{aircraft.alt?.toFixed(1) ?? "--"}</td>
-                            <td>{aircraft.trackingType}</td>
+            
+            <div className="aircraft-table">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Altitude (m)</th>
+                            <th>Tracking Type</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        {allAircraft
+                        .filter((aircraft) => 
+                            trackingFilter === "all" ||
+                            aircraft.trackingType?.toLowerCase() === trackingFilter
+                        )
+                        .map((aircraft) => (
+                            <tr
+                                key={aircraft.id}
+                                className={target === aircraft.id ? "selected-aircraft" : ""}
+                                onClick={() => setTarget(aircraft.id)}
+                                style={{ cursor: "pointer" }}
+                            >
+                                <td>{aircraft.id}</td>
+                                <td>{aircraft.lat?.toFixed(6) ?? "--"}</td>
+                                <td>{aircraft.lon?.toFixed(6) ?? "--"}</td>
+                                <td>{aircraft.alt?.toFixed(1) ?? "--"}</td>
+                                <td>{aircraft.trackingType}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
             
 
