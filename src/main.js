@@ -118,28 +118,16 @@ app.whenReady().then(() => {
   });
 
   // GPS
-  ipcMain.handle("adsb", async (_, startLat, startLon, startEl, targetHexID, cameraPoint) => {
-    return gpsService.adsb(startLat, startLon, startEl, targetHexID, cameraPoint);
-  });
-
-  ipcMain.handle("p5Point", async (_, startLat, startLon, startEl, targetCallsign, cameraPoint) => {
-    return gpsService.p5Point(startLat, startLon, startEl, targetCallsign, cameraPoint);
-  });
-
-  ipcMain.handle("getP5Aircraft", async () => {
-    return gpsService.getP5Aircraft();
-  });
-
-  ipcMain.handle("pointTo", async (_, startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint) => {
-    return gpsService.pointTo(startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint);
-  });
-
   ipcMain.handle("gpsPoint", async (_, startLat, startLon, startEl, targetID, cameraPoint) => {
     return gpsService.gpsPoint(startLat, startLon, startEl, targetID, cameraPoint);
   });
 
   ipcMain.handle("getAllAircraft", async () => {
     return gpsService.getAllAircraft();
+  });
+
+  ipcMain.handle("pointTo", async (_, startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint) => {
+    return gpsService.pointTo(startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint);
   });
 
 
