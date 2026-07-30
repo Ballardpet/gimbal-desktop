@@ -136,6 +136,10 @@ export default function GPS(){
 
             <br />
 
+
+
+
+
             <h2>Track Aircraft</h2>
 
             <label htmlFor="target">Selected Target: </label>
@@ -161,6 +165,13 @@ export default function GPS(){
             >
                 {tracking ? "Stop Tracking" : "Start Tracking"}
             </button>
+
+            <label for="trackingType">Filter Tracking Type (make this actually work)</label>
+            <select id="trackingType" className="trackingType">
+                <option value="all">All</option>
+                <option value="adsb">ADSB</option>
+                <option value="p5">P5</option>
+            </select>
 
             <table border="1">
                 <thead>
