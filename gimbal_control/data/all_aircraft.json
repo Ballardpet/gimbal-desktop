@@ -1,18 +1,18 @@
 {
     "CALLSGN1": {
         "id": "CALLSGN1",
-        "lat": 34.35765000039091,
+        "lat": 34.006200000377426,
         "lon": -117.99999999999999,
-        "alt": 1000.0000143619254,
-        "timestamp": "2026-07-30T15:40:55.464Z",
+        "alt": 1000.0000141048804,
+        "timestamp": "2026-07-30T20:42:44.543Z",
         "trackingType": "p5"
     },
     "CALLSGN2": {
         "id": "CALLSGN2",
         "lat": 34.01000000037725,
-        "lon": -117.65239999998812,
+        "lon": -118.0037999999998,
         "alt": 1200.000014109537,
-        "timestamp": "2026-07-30T15:40:54.963Z",
+        "timestamp": "2026-07-30T20:42:44.543Z",
         "trackingType": "p5"
     },
     "GND1": {
@@ -20,447 +20,199 @@
         "lat": 33.99500000037714,
         "lon": -118.00499999999998,
         "alt": 50.000014090910554,
-        "timestamp": "2026-07-30T15:40:54.963Z",
+        "timestamp": "2026-07-30T20:42:44.543Z",
         "trackingType": "p5"
     },
-    "a74989": {
-        "id": "a74989",
-        "lat": 30.777649,
-        "lon": -86.539253,
-        "alt": 1550,
-        "timestamp": "2026-07-30T15:40:55.122Z",
+    "ad6829": {
+        "id": "ad6829",
+        "lat": 30.901062,
+        "lon": -86.873259,
+        "alt": 23225,
+        "timestamp": "2026-07-30T20:42:44.917Z",
         "trackingType": "adsb"
     },
-    "aad751": {
-        "id": "aad751",
-        "lat": 30.800812,
-        "lon": -86.014279,
-        "alt": 16975,
-        "timestamp": "2026-07-30T15:40:55.122Z",
+    "a2452c": {
+        "id": "a2452c",
+        "lat": 31.150955,
+        "lon": -85.934789,
+        "alt": 31950,
+        "timestamp": "2026-07-30T20:42:44.917Z",
         "trackingType": "adsb"
     },
-    "a146ce": {
-        "id": "a146ce",
-        "lat": 30.794449,
-        "lon": -87.094493,
-        "alt": 37750,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ad7828": {
-        "id": "ad7828",
-        "lat": 30.922028,
-        "lon": -86.982206,
-        "alt": 22000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae5df9": {
-        "id": "ae5df9",
-        "lat": 30.551147,
-        "lon": -86.750363,
-        "alt": 10475,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a816ca": {
-        "id": "a816ca",
-        "lat": 31.119141,
-        "lon": -87.341147,
-        "alt": 36025,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a2536f": {
-        "id": "a2536f",
-        "lat": 31.055054,
-        "lon": -85.424948,
+    "a704d2": {
+        "id": "a704d2",
+        "lat": 31.079065,
+        "lon": -86.999524,
         "alt": 37000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
+        "timestamp": "2026-07-30T20:42:44.917Z",
         "trackingType": "adsb"
     },
-    "adce52": {
-        "id": "adce52",
-        "lat": 31.300887,
-        "lon": -86.549469,
-        "alt": 29000,
-        "timestamp": "2026-07-30T15:40:53.101Z",
-        "trackingType": "adsb"
-    },
-    "a40f88": {
-        "id": "a40f88",
-        "lat": 30.65558,
-        "lon": -86.303925,
-        "alt": 1800,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a5083b": {
-        "id": "a5083b",
-        "lat": 30.521759,
-        "lon": -86.557833,
-        "alt": 4475,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "aa3a7c": {
-        "id": "aa3a7c",
-        "lat": 30.360997,
-        "lon": -86.304639,
-        "alt": 350,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a1947d": {
-        "id": "a1947d",
-        "lat": 30.897263,
-        "lon": -86.804002,
-        "alt": 2200,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ac65bb": {
-        "id": "ac65bb",
-        "lat": 30.788859,
-        "lon": -87.345593,
-        "alt": 22975,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a77ad8": {
-        "id": "a77ad8",
-        "lat": 30.383469,
-        "lon": -87.00671,
-        "alt": 1675,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a9b7d8": {
-        "id": "a9b7d8",
-        "lat": 30.486781,
-        "lon": -83.652924,
-        "alt": 21000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ac984b": {
-        "id": "ac984b",
-        "lat": 30.310534,
-        "lon": -86.155005,
-        "alt": 3475,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a02339": {
-        "id": "a02339",
-        "lat": 30.722534,
-        "lon": -86.075781,
-        "alt": 6975,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae01a4": {
-        "id": "ae01a4",
-        "lat": 30.486432,
-        "lon": -86.51011,
-        "alt": null,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a1a986": {
-        "id": "a1a986",
-        "lat": 31.088745,
-        "lon": -87.6297,
-        "alt": 30000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a21f57": {
-        "id": "a21f57",
-        "lat": 32.896279,
-        "lon": -87.2338,
-        "alt": 38050,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae4ecb": {
-        "id": "ae4ecb",
-        "lat": 30.278732,
-        "lon": -86.02268,
-        "alt": 1475,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a8d95e": {
-        "id": "a8d95e",
-        "lat": 30.658978,
-        "lon": -86.99458,
-        "alt": 1500,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae622f": {
-        "id": "ae622f",
-        "lat": 30.63235,
-        "lon": -86.51239,
-        "alt": 400,
-        "timestamp": "2026-07-30T15:40:54.139Z",
-        "trackingType": "adsb"
-    },
-    "adce9a": {
-        "id": "adce9a",
-        "lat": 30.84787,
-        "lon": -86.254308,
-        "alt": 2900,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "aba696": {
-        "id": "aba696",
-        "lat": 32.002579,
-        "lon": -86.821216,
-        "alt": 32975,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a8986c": {
-        "id": "a8986c",
-        "lat": 32.202883,
-        "lon": -86.651356,
-        "alt": 29000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae4a1d": {
-        "id": "ae4a1d",
-        "lat": 30.970692,
-        "lon": -87.234686,
-        "alt": 7000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a65b64": {
-        "id": "a65b64",
-        "lat": 30.846817,
-        "lon": -87.042577,
-        "alt": 11925,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "af83f5": {
-        "id": "af83f5",
-        "lat": 30.335999,
-        "lon": -87.057441,
-        "alt": 8450,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a60258": {
-        "id": "a60258",
-        "lat": 30.408341,
-        "lon": -86.909711,
-        "alt": 2500,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ad03c4": {
-        "id": "ad03c4",
-        "lat": 32.009354,
-        "lon": -87.394812,
-        "alt": 34000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a8bb7d": {
-        "id": "a8bb7d",
-        "lat": 30.799622,
-        "lon": -86.091183,
-        "alt": 3225,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a70260": {
-        "id": "a70260",
-        "lat": 30.306885,
-        "lon": -86.107662,
-        "alt": 425,
-        "timestamp": "2026-07-30T15:40:49.549Z",
-        "trackingType": "adsb"
-    },
-    "ab6b45": {
-        "id": "ab6b45",
-        "lat": 31.290599,
-        "lon": -88.158527,
-        "alt": 32000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ade576": {
-        "id": "ade576",
-        "lat": 30.340622,
-        "lon": -86.233251,
-        "alt": 2125,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a82aa8": {
-        "id": "a82aa8",
-        "lat": 30.863249,
-        "lon": -85.940497,
-        "alt": 15925,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ac5a94": {
-        "id": "ac5a94",
-        "lat": 31.748886,
-        "lon": -87.418805,
-        "alt": 32475,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ab4c1c": {
-        "id": "ab4c1c",
-        "lat": 32.396075,
-        "lon": -86.720581,
-        "alt": 33000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "0d11f9": {
-        "id": "0d11f9",
-        "lat": 31.483651,
-        "lon": -87.275226,
+    "a28e5b": {
+        "id": "a28e5b",
+        "lat": 31.071477,
+        "lon": -85.554382,
         "alt": 35000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
+        "timestamp": "2026-07-30T20:42:44.917Z",
         "trackingType": "adsb"
     },
-    "ae68b1": {
-        "id": "ae68b1",
-        "lat": 30.756958,
-        "lon": -86.569627,
-        "alt": 4200,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae6295": {
-        "id": "ae6295",
-        "lat": 30.29061,
-        "lon": -87.998621,
-        "alt": 8925,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a5986a": {
-        "id": "a5986a",
-        "lat": 30.6202,
-        "lon": -84.818408,
-        "alt": 41000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a69b86": {
-        "id": "a69b86",
-        "lat": 31.047177,
-        "lon": -85.525378,
-        "alt": 12800,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae648f": {
-        "id": "ae648f",
-        "lat": 31.164908,
-        "lon": -86.179559,
-        "alt": 2775,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae1eab": {
-        "id": "ae1eab",
-        "lat": 30.370605,
-        "lon": -87.268282,
-        "alt": 10800,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a3a8ba": {
-        "id": "a3a8ba",
-        "lat": 32.669802,
-        "lon": -84.415414,
-        "alt": 35025,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a4f1d6": {
-        "id": "a4f1d6",
-        "lat": 30.426682,
-        "lon": -85.59459,
-        "alt": 4200,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "acc31a": {
-        "id": "acc31a",
-        "lat": 32.280253,
-        "lon": -84.757896,
-        "alt": 37000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a1272f": {
-        "id": "a1272f",
-        "lat": 30.215195,
-        "lon": -89.270233,
-        "alt": 35000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ae4a23": {
-        "id": "ae4a23",
-        "lat": 31.038025,
-        "lon": -87.056633,
-        "alt": 3375,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "aca788": {
-        "id": "aca788",
-        "lat": 33.00549,
-        "lon": -87.975377,
-        "alt": 37000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a05636": {
-        "id": "a05636",
-        "lat": 30.616848,
-        "lon": -87.453204,
-        "alt": 5600,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "ac379a": {
-        "id": "ac379a",
-        "lat": 30.398437,
-        "lon": -85.813186,
-        "alt": 1850,
-        "timestamp": "2026-07-30T15:40:55.122Z",
-        "trackingType": "adsb"
-    },
-    "a8b5b2": {
-        "id": "a8b5b2",
-        "lat": 27.655655,
-        "lon": -84.941884,
-        "alt": 43000,
-        "timestamp": "2026-07-30T15:40:55.122Z",
+    "ae68b6": {
+        "id": "ae68b6",
+        "lat": 30.75427,
+        "lon": -86.576221,
+        "alt": 7050,
+        "timestamp": "2026-07-30T20:42:44.917Z",
         "trackingType": "adsb"
     },
     "acfbb7": {
         "id": "acfbb7",
-        "lat": 30.799612,
-        "lon": -86.543372,
-        "alt": 1150,
-        "timestamp": "2026-07-30T15:40:55.122Z",
+        "lat": 30.494183,
+        "lon": -86.512555,
+        "alt": 50,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a4a890": {
+        "id": "a4a890",
+        "lat": 31.355632,
+        "lon": -86.664276,
+        "alt": 9200,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ae7421": {
+        "id": "ae7421",
+        "lat": 30.907516,
+        "lon": -86.545392,
+        "alt": 2025,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "abd1e3": {
+        "id": "abd1e3",
+        "lat": 32.60376,
+        "lon": -87.747363,
+        "alt": 38000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ac015f": {
+        "id": "ac015f",
+        "lat": 31.484023,
+        "lon": -87.101312,
+        "alt": 36000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a5bb10": {
+        "id": "a5bb10",
+        "lat": 31.068237,
+        "lon": -87.176729,
+        "alt": 20000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a55dc3": {
+        "id": "a55dc3",
+        "lat": 31.753052,
+        "lon": -85.622594,
+        "alt": 43000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a3970f": {
+        "id": "a3970f",
+        "lat": 31.751233,
+        "lon": -86.004163,
+        "alt": 36000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ac7e09": {
+        "id": "ac7e09",
+        "lat": 30.497269,
+        "lon": -84.705398,
+        "alt": 33950,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a863e3": {
+        "id": "a863e3",
+        "lat": 30.093292,
+        "lon": -86.645723,
+        "alt": 12075,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ac12be": {
+        "id": "ac12be",
+        "lat": 30.485873,
+        "lon": -86.541257,
+        "alt": null,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ab772b": {
+        "id": "ab772b",
+        "lat": 32.606724,
+        "lon": -87.12786,
+        "alt": 43000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a4bfc1": {
+        "id": "a4bfc1",
+        "lat": 32.609331,
+        "lon": -84.298152,
+        "alt": 37000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ae6d53": {
+        "id": "ae6d53",
+        "lat": 30.743843,
+        "lon": -86.354132,
+        "alt": 675,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a0f8cb": {
+        "id": "a0f8cb",
+        "lat": 30.463133,
+        "lon": -87.652496,
+        "alt": 7625,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a4ee99": {
+        "id": "a4ee99",
+        "lat": 30.389394,
+        "lon": -86.533594,
+        "alt": 1800,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "a23f0c": {
+        "id": "a23f0c",
+        "lat": 31.105225,
+        "lon": -87.349818,
+        "alt": 11050,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ae06da": {
+        "id": "ae06da",
+        "lat": 30.413177,
+        "lon": -86.032374,
+        "alt": 3025,
+        "timestamp": "2026-07-30T20:42:44.917Z",
+        "trackingType": "adsb"
+    },
+    "ab6b02": {
+        "id": "ab6b02",
+        "lat": 30.365047,
+        "lon": -83.511639,
+        "alt": 36000,
+        "timestamp": "2026-07-30T20:42:44.917Z",
         "trackingType": "adsb"
     }
 }

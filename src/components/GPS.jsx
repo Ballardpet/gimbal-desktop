@@ -24,8 +24,8 @@ export default function GPS(){
 
     const [cameraPoint, setCameraPoint] = useState(false);
 
-    // P5
     const [allAircraft, setAllAircraft] = useState([]);
+    const [trackingFilter, setTrackingFilter] = useState("all");
 
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
@@ -166,8 +166,8 @@ export default function GPS(){
                 {tracking ? "Stop Tracking" : "Start Tracking"}
             </button>
 
-            <label for="trackingType">Filter Tracking Type (make this actually work)</label>
-            <select id="trackingType" className="trackingType">
+            <label htmlFor="trackingType">Filter Tracking Type: </label>
+            <select id="trackingType" className="trackingType" value={trackingFilter} onChange={(e) => setTrackingFilter(e.target.value)}>
                 <option value="all">All</option>
                 <option value="adsb">ADSB</option>
                 <option value="p5">P5</option>
@@ -185,7 +185,12 @@ export default function GPS(){
                 </thead>
 
                 <tbody>
-                    {allAircraft.map((aircraft) => (
+                    {allAircraft
+                    .filter((aircraft) => 
+                        trackingFilter === "all" ||
+                        aircraft.trackingType?.toLowerCase() === trackingFilter
+                    )
+                    .map((aircraft) => (
                         <tr
                             key={aircraft.id}
                             className={target === aircraft.id ? "selected-aircraft" : ""}
