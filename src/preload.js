@@ -32,4 +32,11 @@ contextBridge.exposeInMainWorld("api", {
     pointTo: () => 
         ipcRenderer.invoke("pointTo", startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint),
 
+    //
+    gpsPoint: (startLat, startLon, startEl, targetID, cameraPoint) => 
+        ipcRenderer.invoke("gpsPoint", startLat, startLon, startEl, targetID, cameraPoint),
+
+    getAllAircraft: () => 
+        ipcRenderer.invoke("getAllAircraft"),
+
 });

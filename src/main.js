@@ -134,6 +134,14 @@ app.whenReady().then(() => {
     return gpsService.pointTo(startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint);
   });
 
+  ipcMain.handle("gpsPoint", async (_, startLat, startLon, startEl, targetID, cameraPoint) => {
+    return gpsService.gpsPoint(startLat, startLon, startEl, targetID, cameraPoint);
+  });
+
+  ipcMain.handle("getAllAircraft", async () => {
+    return gpsService.getAllAircraft();
+  });
+
 
 
   createWindow();

@@ -9,6 +9,7 @@ import Az_el from './components/Az_el';
 import GPS from './components/GPS';
 
 import Map_Test from './components/map_test';
+import Master_GPS from './components/masterGPS';
 
 // GPS pointing stuff might all need to be in here. Idk how else I'd share
 // that information if I want gps point to be in one half and tracking to be in the other
@@ -24,7 +25,7 @@ const App = () => {
           <Display/>
         </div>
         <div className="half right-side">
-          <GPS/>
+          <Master_GPS/>
           <Map_Test/>
         </div>
       </div>

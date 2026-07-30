@@ -25,6 +25,51 @@ class GpsService {
         });
     }
 
+    async gpsPoint(startLat, startLon, startEl, targetID, cameraPoint){
+        // This will be the master gps tracking function
+        const file= "./gimbal_control/data/all_aircraft.json";
+
+        ///////////////////////////////////////////////////////////////////////
+        try {
+            // read JSON from file
+            const text = await readFile(file, "utf8");
+            const data = JSON.parse(text);
+
+            // Select the right target
+            const target = data[targetID];
+
+            // use relevant aircraft info to get target LLA
+            let targetLat = target.lat;
+            let targetLon = target.lon;
+            let targetEl = target.alt;
+
+            // Reject invalid values
+            if (![targetLat, targetLon, targetEl].every(Number.isFinite)) {
+                return null;
+            }
+
+            // no need to convert elevation from feet to meters. ecef->gps conversion does this already
+            
+            // can call pointTo using start and target LLA
+            this.pointTo(startLat, startLon, startEl, targetLat, targetLon, targetEl, cameraPoint)
+
+            return {
+                lat: targetLat,
+                lon: targetLon,
+                el: targetEl
+            };
+        }
+        catch(error){
+            console.log(error);
+            return null;
+        }
+    }
+
+    async getAllAircraft() {
+        const text = await readFile("./gimbal_control/data/all_aircraft.json", "utf8");
+        return JSON.parse(text);
+    }
+
     async adsb(startLat, startLon, startEl, targetHexID, cameraPoint){
         // Get data from dump1090
         const url= "http://localhost:8080/data/aircraft.json";

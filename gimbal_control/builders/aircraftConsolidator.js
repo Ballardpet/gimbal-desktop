@@ -107,9 +107,9 @@ async function readP5(){
 
             const target = aircraftDict[id];
 
-            target.lat = p5Aircraft.lat;
-            target.lon = p5Aircraft.lon;
-            target.alt = p5Aircraft.alt;
+            target.lat = Number(p5Aircraft.lat);
+            target.lon = Number(p5Aircraft.lon);
+            target.alt = Number(p5Aircraft.alt);
             target.timestamp = new Date(p5Aircraft.timestamp);
             target.trackingType = "p5";
         }
@@ -140,9 +140,9 @@ async function readADSB() {
 
             const target = aircraftDict[id]
 
-            target.lat = data.aircraft[i].lat;
-            target.lon = data.aircraft[i].lon;
-            target.alt = data.aircraft[i].altitude;
+            target.lat = Number(data.aircraft[i].lat);
+            target.lon = Number(data.aircraft[i].lon);
+            target.alt = Number(data.aircraft[i].altitude);
             target.timestamp = timestamp;
             target.trackingType = "adsb";
         }
