@@ -8,14 +8,20 @@ import { readFile } from "fs/promises";
 class GpsService {
 
     constructor() {
-        // THIS MIGHT NOT WORK WHEN RUNNING START.BAT!!!
-        // FIX THIS PART
         this.udpReader = spawn("node", ["./gimbal_control/builders/udpReader.js"], {
             stdio: "inherit"
         });
 
         this.udpReader.on("error", (err) => {
             console.error("Failed to start udpReader:", err);
+        });
+
+        this.aircraftConsolidator = spawn("node", ["./gimbal_control/builders/aircraftConsolidator.js"], {
+            stdio: "inherit"
+        });
+
+        this.aircraftConsolidator.on("error", (err) => {
+            console.error("Failed to start aircraftConsolidator:", err);
         });
     }
 

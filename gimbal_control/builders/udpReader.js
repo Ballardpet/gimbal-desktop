@@ -19,17 +19,19 @@ import path from "path";
 // conversion from ecef to gps
 import projector from "ecef-projector";
 
-console.log("Current working directory:", process.cwd());
+//console.log("Current working directory:", process.cwd());
 
 // JSON file locations
 const JSON_FILE = "./gimbal_control/data/p5_aircraft.json";
 const TEMP_FILE = "./gimbal_control/data/p5_aircraft.tmp";
-fs.mkdirSync("data", { recursive: true });
+//fs.mkdirSync("data", { recursive: true });
 
 const HOST = "0.0.0.0";
 const PORT = 3000;
 
 const aircraftDict = {};
+
+let exporting = false; // help with race condition
 
 class Aircraft {
     constructor() {
@@ -64,37 +66,52 @@ class Aircraft {
 // Export dictionary to JSON
 function exportDictionary() {
 
-    const now = new Date();
+    if (exporting) return; // race condition
 
-    // Delete aircraft that haven't been updated in 10 seconds
-    for (const callsign of Object.keys(aircraftDict)) {
+    exporting = true;
 
-        const aircraft = aircraftDict[callsign];
+    try {
+        //
+        const now = new Date();
 
-        if (now - aircraft.timestamp > 10000) {
-            delete aircraftDict[callsign];
+        // Delete aircraft that haven't been updated in 10 seconds
+        for (const callsign of Object.keys(aircraftDict)) {
+
+            const aircraft = aircraftDict[callsign];
+
+            if (now - aircraft.timestamp > 10000) {
+                delete aircraftDict[callsign];
+            }
         }
+
+        // Convert to JSON
+        const jsonData = {};
+        for (const aircraft of Object.values(aircraftDict)) {
+            jsonData[aircraft.callsign] = aircraft.toJSON();
+        }
+
+        // Write to temporary file
+        fs.writeFileSync(
+            TEMP_FILE,
+            JSON.stringify(jsonData, null, 4)
+        );
+
+        // Replace previous JSON atomically
+        fs.renameSync(TEMP_FILE, JSON_FILE);
+
+        // Debug output
+        console.clear();
+        // Print to console for debugging 
+        // console.log(JSON.stringify(jsonData, null, 4));
+    }
+    catch (error) {
+        console.error(error)
+    }
+    finally {
+        exporting = false
     }
 
-    // Convert to JSON
-    const jsonData = {};
-    for (const aircraft of Object.values(aircraftDict)) {
-        jsonData[aircraft.callsign] = aircraft.toJSON();
-    }
-
-    // Write to temporary file
-    fs.writeFileSync(
-        TEMP_FILE,
-        JSON.stringify(jsonData, null, 4)
-    );
-
-    // Replace previous JSON atomically
-    fs.renameSync(TEMP_FILE, JSON_FILE);
-
-    // Debug output
-    console.clear();
-    // Print to console for debugging 
-    // console.log(JSON.stringify(jsonData, null, 4));
+    
 }
 
 // export every half second
