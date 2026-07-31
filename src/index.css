@@ -45,7 +45,7 @@ body {
 
 .aircraft-table {
   width: 95%;
-  max-height: 300px;
+  max-height: 200px;
   overflow-y: auto;
   overflow-x: auto;
   border: 1px solid black;
@@ -65,5 +65,9 @@ body {
 
 .map {
   width: 95%;
-  height: 700px;
+  height: 400px;
+}
+
+.leaflet-container {
+  background: #b8d8f8 !important;
 }
