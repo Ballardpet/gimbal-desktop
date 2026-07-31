@@ -9,7 +9,7 @@ body {
 .split-container {
   display: flex;             /* Activates flexbox layout */
   flex-direction: row;       /* Aligns items side-by-side */
-  width: 100vw;              /* Fills full viewport width */
+  width: 100%;              /* Fills full viewport width */
   height: 100vh;             /* Fills full viewport height */
 }
 
@@ -18,15 +18,18 @@ body {
   flex: 1;                   /* Forces both sides to grow equally and split 50/50 */
   /*padding: 20px;             /* Adds internal breathing room for content */
   box-sizing: border-box;    /* Prevents padding from breaking the 50% calculation */
+  background-color: #f0f0f0;
 }
 
 /* Optional styling to visually separate the halves */
 .left-side {
-  background-color: #f0f0f0; 
+  /*background-color: #f0f0f0; */
+  border-right: 1px solid #b8b8b8
 }
 
 .right-side {
-  background-color: #e0e0e0;
+  border-left: 1px solid #b8b8b8
+  /*background-color: #e0e0e0;*/
 }
 
 .control {
@@ -39,6 +42,7 @@ body {
 
 /*Styling for the aircraft table*/
 .aircraft-table {
+  margin: 0 auto;
   width: 95%;
   max-height: 180px;
   overflow-y: auto;
@@ -61,6 +65,7 @@ body {
 
 /*Styling for the map and aircraft marker*/
 .map {
+  margin: 0 auto;
   width: 95%;
   height: 400px;
 }
@@ -77,9 +82,9 @@ body {
 
 /* Misc styling*/
 .center_elements {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 input[type="text"] {
@@ -93,3 +98,22 @@ input[type="text"] {
 .subtext-header {
   margin-top: 6px;
 }
+
+
+/*More advanced styling*/
+
+:root {
+  --bg: #1E1E2E;
+  --panel: #2A2D3E;
+  --border: #3C4257;
+  --accent: #4FC3F7;
+  --text: white;
+  --text-secondary: #B0B7C3;
+}
+
+/*
+Maybe put a little box around each section?
+Get a consistent color pallete?
+Maybe a little status bar. Are we connected? which port? that sounds good. 
+Maybe number of aircraft tracking could be nice
+*/
