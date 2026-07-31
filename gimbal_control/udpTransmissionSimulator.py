@@ -10,9 +10,9 @@ DEST_PORT = 3000
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Aircraft positions
-lat1, lon1, alt1 = 34.000000, -118.000000, 1000.0
-lat2, lon2, alt2 = 34.010000, -118.010000, 1200.0
-lat3, lon3, alt3 = 33.995000, -118.005000, 50.0   # Ground vehicle
+lat1, lon1, alt1 = 30.490000, -86.540000, 1000.0
+lat2, lon2, alt2 = 31.010000, -86.010000, 1200.0
+lat3, lon3, alt3 = 30.000, -86.445000, 50.0   # Ground vehicle
 
 
 def send_entity(callsign, entity_id, lat, lon, alt):

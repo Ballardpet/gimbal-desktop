@@ -65,9 +65,15 @@ body {
 
 .map {
   width: 95%;
-  height: 400px;
+  height: 450px;
 }
 
 .leaflet-container {
   background: #b8d8f8 !important;
+}
+
+.aircraft-marker {
+    font-size: 28px;
+    text-align: center;
+    line-height: 30px;
 }

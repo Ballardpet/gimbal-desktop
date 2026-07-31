@@ -36,6 +36,31 @@ export default function GPS(){
     const leafletMapRef = useRef(null);
     const aircraftLayerRef = useRef(null);
 
+    const aircraftIcon = L.divIcon({
+        className: "aircraft-marker",
+        html: "✈",
+        iconSize: [30, 30],
+        iconAnchor: [15, 15]
+    });
+
+    const getAircraftIcon = (type) => {
+
+        let color = "blue";
+
+        if (type === "p5") {
+            color = "red";
+        }
+
+        
+
+        return L.divIcon({
+            className: "aircraft-marker",
+            html: `<span style="color:${color}">✈</span>`,
+            iconSize: [30,30],
+            iconAnchor:[15,15]
+        });
+    };
+
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
 
@@ -117,7 +142,7 @@ export default function GPS(){
     }, []);
 
     useEffect(() => {
-        const map = L.map(mapRef.current).setView([30.4719, -86.5422], 6);
+        const map = L.map(mapRef.current).setView([30.4719, -86.5422], 7);
         
         leafletMapRef.current = map;
         
@@ -139,7 +164,6 @@ export default function GPS(){
 
         if (!leafletMapRef.current) return;
 
-        // remove old markers
         if (aircraftLayerRef.current) {
             aircraftLayerRef.current.clearLayers();
         }
@@ -150,10 +174,15 @@ export default function GPS(){
 
             if (!aircraft.lat || !aircraft.lon) return;
 
-            const marker = L.marker([
-                aircraft.lat,
-                aircraft.lon
-            ]);
+            const marker = L.marker(
+                [
+                    aircraft.lat,
+                    aircraft.lon
+                ],
+                {
+                    icon: getAircraftIcon(aircraft.trackingType)
+                }
+            );
 
             marker.bindPopup(`
                 <b>${aircraft.id}</b><br>
