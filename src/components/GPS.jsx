@@ -20,7 +20,7 @@ export default function GPS(){
     const [destLon, setDestLon] = useState(-86.49811890303361);
     const [destEl, setDestEl] = useState(1);
 
-    // ADSB stuff
+    // Tracking stuff
     const [target, setTarget] = useState("");
 
     const [tracking, setTracking] = useState(false);
@@ -30,24 +30,36 @@ export default function GPS(){
     const [targetLon, setTargetLon] = useState(0);
     const [targetEl, setTargetEl] = useState(0);
 
+    // Option to tilt the face of the gimbal 90 degrees. If you have a camera attached instead of an antennta
     const [cameraPoint, setCameraPoint] = useState(false);
 
+    // List of aircraft and it's filter
     const [allAircraft, setAllAircraft] = useState([]);
     const [trackingFilter, setTrackingFilter] = useState("all");
 
+    // Creation of the map
     const mapRef = useRef(null)
     const leafletMapRef = useRef(null);
+
+    // Display aircraft on the map
     const aircraftLayerRef = useRef(null);
 
+    // Filter aircraft by tracking type
     const filteredAircraft = allAircraft.filter(
         (aircraft) =>
             trackingFilter === "all" ||
             aircraft.trackingType?.toLowerCase() === trackingFilter
     );
 
+    // Generate an icon of the appropriate specifications for an aircraft
     const getAircraftIcon = (aircraft) => {
 
-        let color = "blue";
+        // Default catch-all in case I forget to specify color of a new tracking type
+        let color = "black";
+
+        if (aircraft.trackingType === "adsb") {
+            color = "blue";
+        }
 
         if (aircraft.trackingType === "p5") {
             color = "red";
@@ -65,6 +77,7 @@ export default function GPS(){
         });
     };
 
+    // Point to GPS coordinates
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
 
@@ -81,18 +94,23 @@ export default function GPS(){
         console.log(data);
     }
 
+    // Track aircraft
     const handleTracking = async () => {
+        // Turn tracking off if it's already running when you press the button
         if (trackingRef.current) {
             trackingRef.current = false;
             setTracking(false);
             return;
         }
 
+        // Set tracking tracker to true when program starts
         trackingRef.current = true;
         setTracking(true);
 
+        // Run until tracking is turned off
         while (trackingRef.current) {
             try {
+                // Call the function to point to the aircraft
                 const data = await window.api.gpsPoint(
                     startLat,
                     startLon,
@@ -101,6 +119,7 @@ export default function GPS(){
                     cameraPoint
                 );
 
+                // Set LLA for display
                 if (data) {
                     setTargetLat(data.lat);
                     setTargetLon(data.lon);
@@ -111,13 +130,15 @@ export default function GPS(){
                 console.error(err);
             }
 
+            // Wait a second then loop again
             await sleep(1000);
         }
     };
 
-    // update display
+    // Update the list of all aircraft
     const loadAllAircraft = async () => {
         try {
+            // Call function to get list of aircrat
             const data = await window.api.getAllAircraft();
 
             // Convert object into array
@@ -128,7 +149,7 @@ export default function GPS(){
         }
     }
 
-    // update display
+    // Update every second
     useEffect(() => {
         loadAllAircraft();
 
@@ -137,46 +158,58 @@ export default function GPS(){
         return () => clearInterval(interval);
     }, []);
 
-    // Maybe?
+    // Stop tracking if the aircraft is gone
     useEffect(() => {
         return () => {
             trackingRef.current = false;
         };
     }, []);
 
+    // Create the map
     useEffect(() => {
+        // Create a map that points to current coordinates at zoom 7
         const map = L.map(mapRef.current).setView([30.4719, -86.5422], 7);
         
+        // Make the reference reference this map
         leafletMapRef.current = map;
         
+        // Add styling to the map
         L.geoJSON(world, {
             style: {
                 color: "#666666",
                 weight: 0.5,
-                //fillColor: "#d9d9d9",
                 fillColor: "#d9d9d9",
                 fillOpacity: 1
             }
         }).addTo(map);
+
+        // Cleans up the map
         return () => {
             map.remove();
         };
     }, []);
     
+    // Update the map when the list of filtered aircraft changes
     useEffect(() => {
 
+        // Stop if the map doesn't exist yet
         if (!leafletMapRef.current) return;
 
+        // Clear the layer if one already exists
         if (aircraftLayerRef.current) {
             aircraftLayerRef.current.clearLayers();
         }
 
+        // Make a new layer to hold the aircraft
         const markers = L.layerGroup();
 
+        // For each aircraft
         filteredAircraft.forEach((aircraft) => {
 
+            // Don't try to display an aircraft without lat and lon
             if (!aircraft.lat || !aircraft.lon) return;
 
+            // Make a new market at the right spot with appropriate styling
             const marker = L.marker(
                 [
                     aircraft.lat,
@@ -187,20 +220,29 @@ export default function GPS(){
                 }
             );
 
+            // Creates a popup when you hover over an aircraft
             marker.bindPopup(`
                 <b>${aircraft.id}</b><br>
-                Altitude: ${aircraft.alt ?? "--"} m
+                Altitude: ${aircraft.alt != null ? aircraft.alt.toFixed(0) : "--"} m
             `);
 
+            // Makes it so you can see the popup my mousing over it, not click it
+            marker.on("mouseover", () => marker.openPopup());
+            marker.on("mouseout", () => marker.closePopup());
+
+            // Set this aircraft as target when you click it
             marker.on("click", () => {
                 setTarget(aircraft.id);
             });
 
+            // Add this marker to the layer group
             markers.addLayer(marker);
         });
 
+        // Add all markers to the map
         markers.addTo(leafletMapRef.current);
 
+        // Reference this layergroup to be cleared the next time this function is called
         aircraftLayerRef.current = markers;
 
     }, [filteredAircraft]);
