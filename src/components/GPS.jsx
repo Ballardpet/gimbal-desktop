@@ -43,15 +43,17 @@ export default function GPS(){
         iconAnchor: [15, 15]
     });
 
-    const getAircraftIcon = (type) => {
+    const getAircraftIcon = (aircraft) => {
 
         let color = "blue";
 
-        if (type === "p5") {
+        if (aircraft.trackingType === "p5") {
             color = "red";
         }
 
-        
+        if (aircraft.id === target) {
+            color = "green";
+        }
 
         return L.divIcon({
             className: "aircraft-marker",
@@ -180,7 +182,7 @@ export default function GPS(){
                     aircraft.lon
                 ],
                 {
-                    icon: getAircraftIcon(aircraft.trackingType)
+                    icon: getAircraftIcon(aircraft)
                 }
             );
 
