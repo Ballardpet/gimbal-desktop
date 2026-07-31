@@ -76,7 +76,8 @@ const activeDirection = useRef(null);
 
     return (
         <section>
-            <h2 className="center_elements">Manual Control: Can Use Arrow Keys</h2>
+            <h2 className="center_elements header-with-subtext">Manual Control</h2>
+            <h4 className="center_elements subtext-header">(Can Use Arrow Keys)</h4>
 
             <div className="center_elements">
                 <button type="button" className="control" onClick={() => handleClick("up")}>up</button>

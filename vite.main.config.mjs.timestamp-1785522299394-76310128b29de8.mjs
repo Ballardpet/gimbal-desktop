@@ -1,0 +1,16 @@
+// vite.main.config.mjs
+import { defineConfig } from "file:///C:/Users/Incubator4/Desktop/gimbal-desktop/node_modules/vite/dist/node/index.js";
+var vite_main_config_default = defineConfig({
+  build: {
+    rollupOptions: {
+      external: [
+        "serialport",
+        "@serialport/parser-readline"
+      ]
+    }
+  }
+});
+export {
+  vite_main_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5tYWluLmNvbmZpZy5tanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJDOlxcXFxVc2Vyc1xcXFxJbmN1YmF0b3I0XFxcXERlc2t0b3BcXFxcZ2ltYmFsLWRlc2t0b3BcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfZmlsZW5hbWUgPSBcIkM6XFxcXFVzZXJzXFxcXEluY3ViYXRvcjRcXFxcRGVza3RvcFxcXFxnaW1iYWwtZGVza3RvcFxcXFx2aXRlLm1haW4uY29uZmlnLm1qc1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9pbXBvcnRfbWV0YV91cmwgPSBcImZpbGU6Ly8vQzovVXNlcnMvSW5jdWJhdG9yNC9EZXNrdG9wL2dpbWJhbC1kZXNrdG9wL3ZpdGUubWFpbi5jb25maWcubWpzXCI7aW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSBcInZpdGVcIjtcblxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgYnVpbGQ6IHtcbiAgICByb2xsdXBPcHRpb25zOiB7XG4gICAgICBleHRlcm5hbDogW1xuICAgICAgICBcInNlcmlhbHBvcnRcIixcbiAgICAgICAgXCJAc2VyaWFscG9ydC9wYXJzZXItcmVhZGxpbmVcIixcbiAgICAgIF0sXG4gICAgfSxcbiAgfSxcbn0pOyJdLAogICJtYXBwaW5ncyI6ICI7QUFBc1UsU0FBUyxvQkFBb0I7QUFFblcsSUFBTywyQkFBUSxhQUFhO0FBQUEsRUFDMUIsT0FBTztBQUFBLElBQ0wsZUFBZTtBQUFBLE1BQ2IsVUFBVTtBQUFBLFFBQ1I7QUFBQSxRQUNBO0FBQUEsTUFDRjtBQUFBLElBQ0Y7QUFBQSxFQUNGO0FBQ0YsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

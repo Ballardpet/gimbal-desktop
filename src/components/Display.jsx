@@ -39,9 +39,9 @@ export default function Display(){
 
     return (
         <section>
-            <h2>Gimbal Orientation</h2>
-            <div>Current Azimuth: {azimuth}</div>
-            <div>Current Elevation: {elevation}</div>
+            <h2 className="center_elements">Gimbal Orientation</h2>
+            <div className="center_elements">Current Azimuth: {azimuth}</div>
+            <div className="center_elements">Current Elevation: {elevation}</div>
         </section>
     )
 }

@@ -247,71 +247,75 @@ export default function GPS(){
 
     }, [filteredAircraft]);
     
+    // Use DD
     return (
         <section>
-            <h2>Point to GPS Coordinate. Using DD </h2>
+            <h2 className="center_elements header-with-subtext">Point to GPS Coordinates</h2>
+            <h4 className="center_elements subtext-header">(Use DD)</h4>
 
-
-            <label><input type="checkbox" checked={cameraPoint} onChange={(e) => setCameraPoint(e.target.checked)}/>Camera Point: Adjust "level" to be flat or forward</label>
+            <label className="center_elements"><input type="checkbox" checked={cameraPoint} onChange={(e) => setCameraPoint(e.target.checked)}/>Camera Point: Adjust "level" to be flat or forward</label>
             
             <br />
+            <div className="center_elements">
+                <label htmlFor="currentLat">Current Latitude: </label>
+                <input type="text" id="currentLat" name="currentLat" value={startLat} onChange={(e) => setStartLat(e.target.value)}/>
+                <label htmlFor="currentLong">Current Longitude: </label>
+                <input type="text" id="currentLong" name="currentLong" value={startLon} onChange={(e) => setStartLon(e.target.value)}/>
+                <label htmlFor="currentEl">Current Elevation: </label>
+                <input type="text" id="currentEl" name="currentEl" value={startEl} onChange={(e) => setStartEl(e.target.value)}/>
+            </div>
+
+            <br />
+
+            <div className="center_elements">
+                <label htmlFor="destinationLat">Destination Latitude: </label>
+                <input type="text" id="destinationLat" name="destinationLat" value={destLat} onChange={(e) => setDestLat(e.target.value)}/>
+                <label htmlFor="destinationLong">Destination Longitude: </label>
+                <input type="text" id="destinationLong" name="destinationLong" value={destLon} onChange={(e) => setDestLon(e.target.value)}/>
+                <label htmlFor="destinationEl">Destination Elevation: </label>
+                <input type="text" id="destinationEl" name="destinationEl" value={destEl} onChange={(e) => setDestEl(e.target.value)}/>
+            </div>
+            <br />
+            <div className="center_elements"><button type="button" className="automated" onClick={() => handleClick()}>Point to coordinates</button></div>
+
+            <h2 className="center_elements">Track Aircraft</h2>
+
+            <div className="center_elements">
+                <label htmlFor="target" >Selected Target: </label>
+                    <input
+                        type="text"
+                        id="target"
+                        value={target}
+                        onChange={(e) => setTarget(e.target.value)}
+                    />
+            </div>
+
+            <div className="center_elements">Target Latitude: {targetLat ?? "--"} Target Longitude: {targetLon ?? "--"} Target Elevation: {targetEl ?? "--"}</div>
             
-            <label htmlFor="currentLat">Current Latitude: </label>
-            <input type="text" id="currentLat" name="currentLat" value={startLat} onChange={(e) => setStartLat(e.target.value)}/>
-            <label htmlFor="currentLong">Current Longitude: </label>
-            <input type="text" id="currentLong" name="currentLong" value={startLon} onChange={(e) => setStartLon(e.target.value)}/>
-            <label htmlFor="currentEl">Current Elevation: </label>
-            <input type="text" id="currentEl" name="currentEl" value={startEl} onChange={(e) => setStartEl(e.target.value)}/>
+            <div className="center_elements">
+                <label htmlFor="trackingType">Filter Tracking Type: </label>
+                <select id="trackingType" className="trackingType" value={trackingFilter} onChange={(e) => setTrackingFilter(e.target.value)}>
+                    <option value="all">All</option>
+                    <option value="adsb">ADSB</option>
+                    <option value="p5">P5</option>
+                </select>
 
-            <br />
+                <div>     </div>
 
-            <label htmlFor="destinationLat">Destination Latitude: </label>
-            <input type="text" id="destinationLat" name="destinationLat" value={destLat} onChange={(e) => setDestLat(e.target.value)}/>
-            <label htmlFor="destinationLong">Destination Longitude: </label>
-            <input type="text" id="destinationLong" name="destinationLong" value={destLon} onChange={(e) => setDestLon(e.target.value)}/>
-            <label htmlFor="destinationEl">Destination Elevation: </label>
-            <input type="text" id="destinationEl" name="destinationEl" value={destEl} onChange={(e) => setDestEl(e.target.value)}/>
-            <br />
-            <button type="button" className="automated" onClick={() => handleClick()}>Point to coordinates</button>
+                <button
+                    type="button"
+                    className="automated"
+                    onClick={handleTracking}
+                    style={{
+                        backgroundColor: tracking ? "red" : "green",
+                        color: "white"
+                    }}
+                >
+                    {tracking ? "Stop Tracking" : "Start Tracking"}
+                </button>
+            </div>
 
-            <br />
-
-
-
-
-
-            <h2>Track Aircraft</h2>
-
-            <label htmlFor="target">Selected Target: </label>
-                <input
-                    type="text"
-                    id="target"
-                    value={target}
-                    onChange={(e) => setTarget(e.target.value)}
-                />
-            
-            <br />
-
-            <div>Target Latitude: {targetLat ?? "--"} Target Longitude: {targetLon ?? "--"} Target Elevation: {targetEl ?? "--"}</div>
-            
-            <button
-                type="button"
-                className="automated"
-                onClick={handleTracking}
-                style={{
-                    backgroundColor: tracking ? "red" : "green",
-                    color: "white"
-                }}
-            >
-                {tracking ? "Stop Tracking" : "Start Tracking"}
-            </button>
-
-            <label htmlFor="trackingType">Filter Tracking Type: </label>
-            <select id="trackingType" className="trackingType" value={trackingFilter} onChange={(e) => setTrackingFilter(e.target.value)}>
-                <option value="all">All</option>
-                <option value="adsb">ADSB</option>
-                <option value="p5">P5</option>
-            </select>
+            <br/>
 
             <div ref={mapRef} className="map"></div>
             

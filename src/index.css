@@ -29,12 +29,6 @@ body {
   background-color: #e0e0e0;
 }
 
-.center_elements {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
 .control {
   width: 90px;
   height: 60px;
@@ -43,9 +37,10 @@ body {
   cursor: pointer;
 }
 
+/*Styling for the aircraft table*/
 .aircraft-table {
   width: 95%;
-  max-height: 200px;
+  max-height: 180px;
   overflow-y: auto;
   overflow-x: auto;
   border: 1px solid black;
@@ -63,9 +58,11 @@ body {
   z-index: 1;
 }
 
+
+/*Styling for the map and aircraft marker*/
 .map {
   width: 95%;
-  height: 450px;
+  height: 400px;
 }
 
 .leaflet-container {
@@ -73,7 +70,26 @@ body {
 }
 
 .aircraft-marker {
-    font-size: 28px;
-    text-align: center;
-    line-height: 30px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 30px;
+}
+
+/* Misc styling*/
+.center_elements {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+input[type="text"] {
+  width: 150px;
+}
+
+.header-with-subtext {
+  margin-bottom: 6px;
+}
+
+.subtext-header {
+  margin-top: 6px;
 }

@@ -15,15 +15,20 @@ export default function Az_el(){
 
     return (
         <section>
-            <div>Don't forget to center these!</div>
-            <h2 >Point to Azimuth/Elevation: Default Points South</h2>
-            <label htmlFor="azimuth">Destination Azimuth,0 to 360.00: </label>
-            <input type="text" id="azimuth" name = "azimuth" value={azimuth} onChange={(e) => setAzimuth(Number(e.target.value))} />
+            <h2 className="center_elements header-with-subtext">Point to Azimuth/Elevation</h2>
+            <h4 className="center_elements subtext-header">(Default Points South)</h4>
+            <div className="center_elements">
+                <label htmlFor="azimuth">Destination Azimuth,0 to 360.00: </label>
+                <input type="text" id="azimuth" name = "azimuth" value={azimuth} onChange={(e) => setAzimuth(Number(e.target.value))} />
+            </div>
             <br />
-            <label htmlFor ="elevation">Destination Elevation, -90.00 to 90.00: </label>
-            <input type="text" id="elevation" name="elevation" value={elevation} onChange={(e) => setElevation(Number(e.target.value))}/>
+            <div className="center_elements">
+                <label htmlFor ="elevation">Destination Elevation, -90.00 to 90.00: </label>
+                <input type="text" id="elevation" name="elevation" value={elevation} onChange={(e) => setElevation(Number(e.target.value))}/>
+            </div>
             <br />
-            <button type="button" className="automated" onClick={() => handleClick()}>Point to az/el</button>
+            <div className="center_elements"><button type="button" className="automated" onClick={() => handleClick()}>Point to az/el</button></div>
         </section>
     )
 }
+
