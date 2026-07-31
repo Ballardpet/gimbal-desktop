@@ -62,3 +62,8 @@ body {
   background: white;
   z-index: 1;
 }
+
+.map {
+  width: 95%;
+  height: 700px;
+}

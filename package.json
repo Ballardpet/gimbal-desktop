@@ -35,6 +35,7 @@
     "@serialport/parser-readline": "^13.0.0",
     "ecef-projector": "^1.0.1",
     "electron-squirrel-startup": "^1.0.1",
+    "leaflet": "^1.9.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "serialport": "^13.0.0"
