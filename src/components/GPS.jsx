@@ -39,12 +39,11 @@ export default function GPS(){
     const leafletMapRef = useRef(null);
     const aircraftLayerRef = useRef(null);
 
-    const aircraftIcon = L.divIcon({
-        className: "aircraft-marker",
-        html: "✈",
-        iconSize: [30, 30],
-        iconAnchor: [15, 15]
-    });
+    const filteredAircraft = allAircraft.filter(
+        (aircraft) =>
+            trackingFilter === "all" ||
+            aircraft.trackingType?.toLowerCase() === trackingFilter
+    );
 
     const getAircraftIcon = (aircraft) => {
 
@@ -69,7 +68,6 @@ export default function GPS(){
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
 
-        //const data = await window.api.gpsPoint(
         const data = await window.api.pointTo(
             startLat,
             startLon,
@@ -175,7 +173,7 @@ export default function GPS(){
 
         const markers = L.layerGroup();
 
-        allAircraft.forEach((aircraft) => {
+        filteredAircraft.forEach((aircraft) => {
 
             if (!aircraft.lat || !aircraft.lon) return;
 
@@ -205,7 +203,7 @@ export default function GPS(){
 
         aircraftLayerRef.current = markers;
 
-    }, [allAircraft]);
+    }, [filteredAircraft]);
     
     return (
         <section>
@@ -288,12 +286,7 @@ export default function GPS(){
                     </thead>
 
                     <tbody>
-                        {allAircraft
-                        .filter((aircraft) => 
-                            trackingFilter === "all" ||
-                            aircraft.trackingType?.toLowerCase() === trackingFilter
-                        )
-                        .map((aircraft) => (
+                        {filteredAircraft.map((aircraft) => (
                             <tr
                                 key={aircraft.id}
                                 className={target === aircraft.id ? "selected-aircraft" : ""}
