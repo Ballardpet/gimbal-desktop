@@ -1,4 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+import world from "../data/crisp_world.json";
+// import world from "../data/world.json";
  
 export default function GPS(){
 
@@ -26,6 +31,8 @@ export default function GPS(){
 
     const [allAircraft, setAllAircraft] = useState([]);
     const [trackingFilter, setTrackingFilter] = useState("all");
+
+    const mapRef = useRef(null)
 
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
@@ -105,6 +112,22 @@ export default function GPS(){
             trackingRef.current = false;
         };
     }, []);
+
+    useEffect(() => {
+        const map = L.map(mapRef.current).setView([30.4719, -86.5422], 6);
+        L.geoJSON(world, {
+            style: {
+                color: "#666666",
+                weight: 0.5,
+                //fillColor: "#d9d9d9",
+                fillColor: "#d9d9d9",
+                fillOpacity: 1
+            }
+        }).addTo(map);
+        return () => {
+            map.remove();
+        };
+    }, []);
     
     
     return (
@@ -172,6 +195,8 @@ export default function GPS(){
                 <option value="adsb">ADSB</option>
                 <option value="p5">P5</option>
             </select>
+
+            <div ref={mapRef} className="map"></div>
             
             <div className="aircraft-table">
                 <table border="1">
