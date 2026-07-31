@@ -24,7 +24,7 @@ contextBridge.exposeInMainWorld("api", {
     getAllAircraft: () => 
         ipcRenderer.invoke("getAllAircraft"),
 
-    pointTo: () => 
+    pointTo: (startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint) => 
         ipcRenderer.invoke("pointTo", startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint),
 
 });

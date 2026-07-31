@@ -33,11 +33,14 @@ export default function GPS(){
     const [trackingFilter, setTrackingFilter] = useState("all");
 
     const mapRef = useRef(null)
+    const leafletMapRef = useRef(null);
+    const aircraftLayerRef = useRef(null);
 
     const handleClick = async() => {
         console.log("Put a relevant GPS message here");
 
-        const data = await window.api.gpsPoint(
+        //const data = await window.api.gpsPoint(
+        const data = await window.api.pointTo(
             startLat,
             startLon,
             startEl,
@@ -115,6 +118,9 @@ export default function GPS(){
 
     useEffect(() => {
         const map = L.map(mapRef.current).setView([30.4719, -86.5422], 6);
+        
+        leafletMapRef.current = map;
+        
         L.geoJSON(world, {
             style: {
                 color: "#666666",
@@ -129,6 +135,43 @@ export default function GPS(){
         };
     }, []);
     
+    useEffect(() => {
+
+        if (!leafletMapRef.current) return;
+
+        // remove old markers
+        if (aircraftLayerRef.current) {
+            aircraftLayerRef.current.clearLayers();
+        }
+
+        const markers = L.layerGroup();
+
+        allAircraft.forEach((aircraft) => {
+
+            if (!aircraft.lat || !aircraft.lon) return;
+
+            const marker = L.marker([
+                aircraft.lat,
+                aircraft.lon
+            ]);
+
+            marker.bindPopup(`
+                <b>${aircraft.id}</b><br>
+                Altitude: ${aircraft.alt ?? "--"} m
+            `);
+
+            marker.on("click", () => {
+                setTarget(aircraft.id);
+            });
+
+            markers.addLayer(marker);
+        });
+
+        markers.addTo(leafletMapRef.current);
+
+        aircraftLayerRef.current = markers;
+
+    }, [allAircraft]);
     
     return (
         <section>
