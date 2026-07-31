@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-import world from "../data/crisp_world.json";
-// import world from "../data/world.json";
+// It takes a very long time to load the larger map. Might have to use a different one
+import world from "../data/0.05_crisp.json"; // 5.84 seconds to load after running start
+//import world from "../data/crisp_world.json"; // 12.10 seconds to load after running start
+//import world from "../data/world.json"; // 4.30 seconds to load after running start
+
  
 export default function GPS(){
 

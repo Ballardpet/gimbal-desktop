@@ -20,6 +20,7 @@ const App = () => {
           <Manual_Control/>
           <Az_el/>
           <Display/>
+          <h1>Definitely Have room for amplifier control here</h1>
         </div>
         <div className="half right-side">
           <GPS/>
