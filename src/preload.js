@@ -27,4 +27,5 @@ contextBridge.exposeInMainWorld("api", {
     pointTo: (startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint) => 
         ipcRenderer.invoke("pointTo", startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint),
 
+    // Put amplifier functions here
 });

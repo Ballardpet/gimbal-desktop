@@ -5,6 +5,7 @@ import ManualService from '../gimbal_control/services/manual.service.js';
 import AzElService from "../gimbal_control/services/azEl.service.js";
 import DisplayService from "../gimbal_control/services/display.service.js"; //
 import GpsService from '../gimbal_control/services/gps.service.js';
+import AmplifierService from '../gimbal_control/services/Amplifier.service.js';
 
 // imports for spawning Dump1090 as a process
 import { spawn } from "child_process";
@@ -13,6 +14,7 @@ const manualService = new ManualService();
 const azElService = new AzElService();
 const displayservice = new DisplayService();
 const gpsService = new GpsService();
+const amplifierService = new AmplifierService();
 
 let dump1090Process = null;
 
@@ -131,6 +133,9 @@ app.whenReady().then(() => {
   ipcMain.handle("pointTo", async (_, startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint) => {
     return gpsService.pointTo(startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint);
   });
+
+  // Amplifier
+    // Put amplifier functions here
 
 
 

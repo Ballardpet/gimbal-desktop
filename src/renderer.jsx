@@ -7,6 +7,7 @@ import Manual_Control from './components/Manual_Control';
 import Display from './components/Display';
 import Az_el from './components/Az_el';
 import GPS from './components/GPS';
+import Amplifier from './components/Amplifier';
 
 // GPS pointing stuff might all need to be in here. Idk how else I'd share
 // that information if I want gps point to be in one half and tracking to be in the other
@@ -20,7 +21,7 @@ const App = () => {
           <Manual_Control/>
           <Az_el/>
           <Display/>
-          <h1 className="center_elements">Definitely have room for amplifier control here</h1>
+          <Amplifier/>
         </div>
         <div className="half right-side">
           <GPS/>
