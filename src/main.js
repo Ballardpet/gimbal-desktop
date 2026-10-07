@@ -136,6 +136,49 @@ app.whenReady().then(() => {
 
   // Amplifier
     // Put amplifier functions here
+  ipcMain.handle("enableRF", async () => {
+    return amplifierService.enableRF();
+  });
+
+  ipcMain.handle("disableRF", async () => {
+    return amplifierService.disableRF();
+  });
+
+  ipcMain.handle("clearFaults", async () => {
+    return amplifierService.clearFaults();
+  });
+
+  ipcMain.handle("softwareReset", async () => {
+    return amplifierService.softwareReset();
+  });
+
+  ipcMain.handle("setAttenuation", async (_, decibels) => {
+    return amplifierService.pointTo(decibels);
+  });
+
+  ipcMain.handle("getModuleState", async () => {
+    return amplifierService.getModuleState();
+  });
+
+  ipcMain.handle("getTemp", async () => {
+    return amplifierService.getTemp();
+  });
+
+  ipcMain.handle("getVoltage", async () => {
+    return amplifierService.getVoltage();
+  });
+
+  ipcMain.handle("getCurrent", async () => {
+    return amplifierService.getCurrent();
+  });
+
+  ipcMain.handle("getFaults", async () => {
+    return amplifierService.getFaults();
+  });
+
+  ipcMain.handle("getTempAlarmStatus", async () => {
+    return amplifierService.getTempAlarmStatus();
+  });
 
 
 

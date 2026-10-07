@@ -28,4 +28,36 @@ contextBridge.exposeInMainWorld("api", {
         ipcRenderer.invoke("pointTo", startLat, startLon, startEl, destLat, destLon, destEl, cameraPoint),
 
     // Put amplifier functions here
+    enableRF: () =>
+        ipcRenderer.invoke("enableRF"),
+
+    disableRF: () =>
+        ipcRenderer.invoke("disableRF"),
+
+    clearFaults: () =>
+        ipcRenderer.invoke("clearFaults"),
+
+    softwareReset: () =>
+        ipcRenderer.invoke("softwareReset"),
+
+    setAttenuation: (decibels) =>
+        ipcRenderer.invoke("setAttenuation", decibels),
+
+    getModuleState: () =>
+        ipcRenderer.invoke("getModuleState"),
+
+    getTemp: () =>
+        ipcRenderer.invoke("getTemp"),
+
+    getVoltage: () =>
+        ipcRenderer.invoke("getVoltage"),
+
+    getCurrent: () =>
+        ipcRenderer.invoke("getCurrent"),
+
+    getFaults: () =>
+        ipcRenderer.invoke("getFaults"),
+
+    getTempAlarmStatus: () =>
+        ipcRenderer.invoke("getTempAlarmStatus"),
 });
