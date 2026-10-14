@@ -148,8 +148,8 @@ app.whenReady().then(() => {
     return amplifierService.clearFaults();
   });
 
-  ipcMain.handle("softwareReset", async () => {
-    return amplifierService.softwareReset();
+  ipcMain.handle("softReset", async () => {
+    return amplifierService.softReset();
   });
 
   ipcMain.handle("setAttenuation", async (_, decibels) => {

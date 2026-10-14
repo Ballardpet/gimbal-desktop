@@ -28,8 +28,8 @@ export default function Amplifier(){
         console.log(data);
     }
 
-    const softwareReset = async () => {
-        const data = await window.api.softwareReset();
+    const softReset = async () => {
+        const data = await window.api.softReset();
         console.log(data);
     }
 
@@ -108,7 +108,7 @@ export default function Amplifier(){
                 <button onClick={() => enableRF()}>Enable RF</button>
                 <button onClick={() => disableRF()}>Disable RF</button>
                 <button onClick={() => clearFaults()}>Clear Faults</button>
-                <button onClick={() => softwareReset()}>Software Reset</button>
+                <button onClick={() => softReset()}>Soft Reset</button>
             </div>
             <div className="center_elements">
                 <label htmlFor ="attenuation">Attenuation(db)(find actual range)(maybe show the attenuation): </label>
