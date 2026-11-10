@@ -11,7 +11,8 @@ export default function Amplifier(){
     const [current, setCurrent] = useState(0);
     const [faults, setFaults] = useState([]);
     const [tempAlarm, setTempAlarm] = useState(null);
-    
+    const [attenuation, setAttenuationValue] = useState(0);
+
     // Reference Manual_Control.jsc for control info
     const enableRF = async () => {
         const data = await window.api.enableRF();
@@ -34,7 +35,6 @@ export default function Amplifier(){
     }
 
     const setAttenuation = async () => {
-        const attenuation = document.getElementById("attenuation").value
         const data = await window.api.setAttenuation(attenuation);
         console.log(data);
     }
@@ -118,8 +118,8 @@ export default function Amplifier(){
                 <button onClick={() => sendTestCommand()}>Test Command</button>
             </div>
             <div className="center_elements">
-                <label htmlFor ="attenuation">Attenuation(db)(find actual range)(maybe show the attenuation): </label>
-                <input type="range" min="0" max="31.5" step="0.1" className="slider " id="attenuation" name="attenuation" />
+                <label htmlFor ="attenuation">Attenuation(db){attenuation.toFixed(1)}: </label>
+                <input type="range" min="0" max="31.5" step="0.1" className="slider " id="attenuation" name="attenuation" value={attenuation} onChange={(e) => setAttenuationValue(Number(e.target.value))} />
             </div>
             <div className="center_elements" onClick={() => setAttenuation()}><button>Set Attenuation</button></div>
             
