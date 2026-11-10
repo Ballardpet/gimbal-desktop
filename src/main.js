@@ -153,7 +153,7 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle("setAttenuation", async (_, decibels) => {
-    return amplifierService.pointTo(decibels);
+    return amplifierService.setAttenuation(decibels);
   });
 
   ipcMain.handle("getModuleState", async () => {

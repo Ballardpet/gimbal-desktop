@@ -119,7 +119,7 @@ export default function Amplifier(){
             </div>
             <div className="center_elements">
                 <label htmlFor ="attenuation">Attenuation(db)(find actual range)(maybe show the attenuation): </label>
-                <input type="range" min="0" max="40" className="slider " id="attenuation" name="attenuation" />
+                <input type="range" min="0" max="31.5" step="0.1" className="slider " id="attenuation" name="attenuation" />
             </div>
             <div className="center_elements" onClick={() => setAttenuation()}><button>Set Attenuation</button></div>
             

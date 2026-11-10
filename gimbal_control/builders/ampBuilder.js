@@ -93,38 +93,92 @@ class AmpBuilder {
     // Control commands
     async enableRF(){
         // 0x06
-        const packet = await this.buildCommand(0x06); 
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x06,
+            0x05
+        ]);
 
-        await this.sendCommand(packet);
+       await this.sendCommand(packet);
     }
 
     async disableRF(){
         // 0x05
-        const packet = await this.buildCommand(0x05); 
-        
-        await this.sendCommand(packet);
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x05,
+            0x06
+        ]);
+
+       await this.sendCommand(packet);
     }
 
     async clearFaults(){
         // 0x09
-        const packet = await this.buildCommand(0x09); 
-        
-        await this.sendCommand(packet);
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x09,
+            0x0A
+        ]);
+
+       await this.sendCommand(packet);
     }
 
     async softReset(){
         // 0x03
-        const packet = await this.buildCommand(0x03); 
-        
-        await this.sendCommand(packet);
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x03,
+            0x00
+        ]);
+
+       await this.sendCommand(packet);
     }
 
     async setAttenuation(decibels){
         // 0x0D
         // eventually make sure decibels are formatted correctly
             // They definitely are not
-        const packet = await this.buildCommand(0x0D, decibels); 
-        
+
+        // Convert dB to tenths of a dB
+        const value = Math.round(decibels * 10);
+
+        // Split into two bytes (big-endian)
+        const data1 = (value >> 8) & 0xFF;
+        const data2 = value & 0xFF;
+
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x05,
+            0x00,
+            0x0D,
+            data1,
+            data2,
+            0x00 // Placeholder for checksum
+        ]);
+
+        // XOR checksum
+        let checksum = 0;
+
+        for (const byte of packet.slice(2, 7)) {
+            checksum ^= byte;
+        }
+
+        packet[7] = checksum;
+
         await this.sendCommand(packet);
     }
 

@@ -6,10 +6,12 @@ class AmplifierService {
     // Control
     async enableRF(){
         //
+        ampBuilder.enableRF();
     }
 
     async disableRF(){
         //
+        ampBuilder.disableRF();
     }
 
     async clearFaults(){
@@ -17,12 +19,14 @@ class AmplifierService {
         ampBuilder.clearFaults();
     }
 
-    async softwareReset(){
-        //
+    async softReset(){
+        ampBuilder.softReset();
     }
 
     async setAttenuation(decibels){
         // set attenuation to be that db
+        ampBuilder.setAttenuation(decibels);
+
     }
 
     // Data

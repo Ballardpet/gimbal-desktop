@@ -37,7 +37,7 @@ contextBridge.exposeInMainWorld("api", {
     clearFaults: () =>
         ipcRenderer.invoke("clearFaults"),
 
-    softeReset: () =>
+    softReset: () =>
         ipcRenderer.invoke("softReset"),
 
     setAttenuation: (decibels) =>
