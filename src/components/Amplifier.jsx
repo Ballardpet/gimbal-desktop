@@ -38,6 +38,12 @@ export default function Amplifier(){
         const data = await window.api.setAttenuation(attenuation);
         console.log(data);
     }
+
+    const sendTestCommand = async () => {
+        const data = await window.api.sendTestCommand();
+        console.log(data);
+    }
+
     
     // Reference Display.jsx for telemetry info
     // maybe consolidate the fetches a bit
@@ -109,6 +115,7 @@ export default function Amplifier(){
                 <button onClick={() => disableRF()}>Disable RF</button>
                 <button onClick={() => clearFaults()}>Clear Faults</button>
                 <button onClick={() => softReset()}>Soft Reset</button>
+                <button onClick={() => sendTestCommand()}>Test Command</button>
             </div>
             <div className="center_elements">
                 <label htmlFor ="attenuation">Attenuation(db)(find actual range)(maybe show the attenuation): </label>

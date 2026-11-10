@@ -17,7 +17,7 @@ class PelcoBuilder {
     static sync = 0xFF;
     static gimbalAddress = 0x01; // may also be 0x00
     static port = new SerialPort({
-        path: 'COM4',
+        path: 'COM3', // CHANGE BACK TO 4
         dataBits: 8,
         stopBits: 1,
         baudRate: 2400, // May also be 4800 or 9600

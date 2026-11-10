@@ -14,6 +14,7 @@ class AmplifierService {
 
     async clearFaults(){
         //
+        ampBuilder.clearFaults();
     }
 
     async softwareReset(){
@@ -63,6 +64,11 @@ class AmplifierService {
         let tempAlarmStatus = await ampBuilder.getTempalarmStatus();
         // may need to process it a bit here
         return tempAlarmStatus;
+    }
+
+    async sendTestCommand(){
+        //
+        ampBuilder.sendTestCommand();
     }
 }
 

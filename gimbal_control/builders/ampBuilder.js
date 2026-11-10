@@ -16,7 +16,7 @@ class AmpBuilder {
     static amplifierAddress = 0x01;
 
     static port = new SerialPort({
-        path: 'COM5', // just a placeholder. no clue what port it'll be yet
+        path: 'COM4', // just a placeholder. no clue what port it'll be yet
         dataBits: 8,
         stopBits: 1,
         baudRate: 115200,
@@ -28,6 +28,9 @@ class AmpBuilder {
         AmpBuilder.port.on("data", (data) => {
             console.log("Received bytes:", data.toString("hex"));
         });
+
+        // maybe add a port.on("error")
+        // maybe add a porn.on("close")
 
         this.connectSerial();
         //AmpBuilder.port.pipe(AmpBuilder.parser); // readline parser isn't appropriate, but I'm leaving it here for reference
@@ -172,6 +175,20 @@ class AmpBuilder {
     }
 
     // Add a getAttenuation()?
+
+    // add a function to send that exact command?
+    async sendTestCommand(){
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x00,
+            0x03
+        ]);
+
+       await this.sendCommand(packet);
+    }
 }
 
 export const ampBuilder = new AmpBuilder();

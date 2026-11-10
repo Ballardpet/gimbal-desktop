@@ -180,6 +180,10 @@ app.whenReady().then(() => {
     return amplifierService.getTempAlarmStatus();
   });
 
+  ipcMain.handle("sendTestCommand", async () => {
+    return amplifierService.sendTestCommand();
+  });
+
 
 
   createWindow();

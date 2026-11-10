@@ -60,4 +60,7 @@ contextBridge.exposeInMainWorld("api", {
 
     getTempAlarmStatus: () =>
         ipcRenderer.invoke("getTempAlarmStatus"),
+
+    sendTestCommand: () =>
+        ipcRenderer.invoke("sendTestCommand"),
 });
