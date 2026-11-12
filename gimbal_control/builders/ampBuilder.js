@@ -280,7 +280,7 @@ class AmpBuilder {
 
         // Parse telemetry
         // TODO: Add byte offsets and scaling from manufacturer's documentation.
-
+        
         const telemetry = {
             currents: [],
             voltage: null,
