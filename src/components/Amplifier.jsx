@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 // MAKE A FUNCTION TO ACTUALLY UPDATE THE DISPLAY!!!
     // Probably call all fetch functions once every second or something
@@ -48,40 +48,14 @@ export default function Amplifier(){
     // Reference Display.jsx for telemetry info
     // maybe consolidate the fetches a bit
     // Call all every second maybe?
+    // fetchModState should cover everything relevant
     const fetchModState = async () => {
-        try{
+        try {
             const mod = await window.api.getModuleState();
-            setModuleState(mod);
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
 
-    const fetchTemperature = async () => {
-        try{
-            const mod = await window.api.getTemperature();
-            setTemperature(mod);
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
-
-    const fetchVoltage = async () => {
-        try{
-            const mod = await window.api.getVoltage();
-            setVoltage(mod);
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
-
-    const fetchCurrent = async () => {
-        try{
-            const mod = await window.api.getCurrent();
-            setCurrent(mod);
+            setTemperature(mod.temperature);
+            setVoltage(mod.voltage);
+            setCurrent(mod.totalCurrent);
         }
         catch (error) {
             console.error(error);
@@ -107,6 +81,19 @@ export default function Amplifier(){
         }
     };
 
+    useEffect(() => {
+        // fetch immediately on mount
+        fetchModState();
+
+        // then fetch repeatedly
+        const interval = setInterval(() => {
+            fetchModState();
+        }, 1000); // every 1 second
+
+        // cleanup when component unmounts
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section>
             <h2 className="center_elements">Amplifier Control</h2>
@@ -125,9 +112,9 @@ export default function Amplifier(){
             
             <h2 className="center_elements">Amplifier Telemetry</h2>
             <div className="center_elements">Module State: {moduleState}</div>
-            <div className="center_elements">Temperature: {temperature}</div>
-            <div className="center_elements">Voltage: {voltage}</div>
-            <div className="center_elements">Current: {current}</div>
+            <div className="center_elements">Temperature: {temperature} F</div>
+            <div className="center_elements">Voltage: {voltage} V</div>
+            <div className="center_elements">Current: {current} A</div>
             <div className="center_elements">Faults: {faults}</div>
             <div className="center_elements">Temp Alarm: {tempAlarm}</div>
         </section>

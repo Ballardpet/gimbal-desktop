@@ -30,28 +30,61 @@ class AmplifierService {
     }
 
     // Data
+    /*
     async getModuleState(){ 
         let modState = await ampBuilder.getModuleState();
         // may need to process it a bit here
         return modState;
     }
+        */
 
-    async getTemp(){
-        let temp = await ampBuilder.getTemp();
-        // may need to process it a bit here
-        return temp;
-    }
+    async getModuleState() {
+        const modState = await ampBuilder.getModuleState();
+        const response = modState.rawResponse;
 
-    async getVoltage(){
-        let voltage = await ampBuilder.getVoltage();
-        // may need to process it a bit here
-        return voltage;
-    }
+        if (!Buffer.isBuffer(response)) {
+            throw new Error("Invalid amplifier response.");
+        }
 
-    async getCurrent(){
-        let current = await ampBuilder.getCurrent();
-        // may need to process it a bit here
-        return current;
+        // Verify packet length
+        if (response.length !== response[2] + 3) {
+            throw new Error("Invalid response length.");
+        }
+
+        // Verify command
+        if (response[4] !== 0x02) {
+            throw new Error("Unexpected response command.");
+        }
+
+        // Verify checksum
+        let checksum = 0;
+
+        for (let i = 2; i < response.length - 1; i++) {
+            checksum ^= response[i];
+        }
+
+        if (checksum !== response[response.length - 1]) {
+            throw new Error("Invalid response checksum.");
+        }
+
+        // Locate telemetry fields by working backward from response tail
+        const checksumIndex = response.length - 1;
+        const analogAlarmStart = checksumIndex - 8;
+        const temperatureIndex = analogAlarmStart - 3;
+        const voltageIndex = temperatureIndex - 2;
+        const totalCurrentIndex = voltageIndex - 2;
+
+        // Decode telemetry
+        const totalCurrent = response.readUInt16BE(totalCurrentIndex) / 100;
+        const voltage = response.readUInt16BE(voltageIndex) / 100;
+        const temperatureC = response.readUInt16BE(temperatureIndex);
+        const temperature = (temperatureC * 9 / 5) + 32;
+
+        return {
+            temperature,
+            voltage,
+            totalCurrent
+        };
     }
 
     async getFaults(){

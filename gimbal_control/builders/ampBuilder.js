@@ -52,7 +52,7 @@ class AmpBuilder {
             }
         });
     }
-
+/*
     // build the command
     async buildCommand(command, payload = []){
         const status = 0x00;
@@ -82,7 +82,7 @@ class AmpBuilder {
 
         return Buffer.from(packet);
     }
-
+*/
     // send built commands to the amp
     async sendCommand(command) {
         AmpBuilder.port.write(Buffer.from(command));
@@ -102,7 +102,7 @@ class AmpBuilder {
             0x05
         ]);
 
-       await this.sendCommand(packet);
+        await this.sendCommand(packet);
     }
 
     async disableRF(){
@@ -116,7 +116,7 @@ class AmpBuilder {
             0x06
         ]);
 
-       await this.sendCommand(packet);
+        await this.sendCommand(packet);
     }
 
     async clearFaults(){
@@ -130,7 +130,7 @@ class AmpBuilder {
             0x0A
         ]);
 
-       await this.sendCommand(packet);
+        await this.sendCommand(packet);
     }
 
     async softReset(){
@@ -144,7 +144,7 @@ class AmpBuilder {
             0x00
         ]);
 
-       await this.sendCommand(packet);
+        await this.sendCommand(packet);
     }
 
     async setAttenuation(decibels){
@@ -183,41 +183,130 @@ class AmpBuilder {
     }
 
     // Data commands
-    // PLACEHOLDER
-    async getModuleState(){
-        // Probably connected vs not
-        // 0x02?
-        let packet = "message"
-        
-        await this.sendCommand(packet);
-    }
 
-    async getTemp(){
-        // 0x07
-        const packet = await this.buildCommand(0x07); 
-        
-        await this.sendCommand(packet);
-    }
+    // Handles most telemetry functions
+    // Straight AI garbage but it works
+    async getModuleState() {
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x02,
+            0x01
+        ]);
 
-    async getVoltage(){
-        // 0x0B
-        const packet = await this.buildCommand(0x0B); 
-        
-        await this.sendCommand(packet);
-    }
+        // Collect the response
+        const responsePromise = new Promise((resolve, reject) => {
+            let responseBuffer = Buffer.alloc(0);
 
-    async getCurrent(){
-        // 0x0A
-        const packet = await this.buildCommand(0x0A); 
-        
+            const cleanup = () => {
+                AmpBuilder.port.off("data", onData);
+                clearTimeout(timeout);
+            };
+
+            const onData = (data) => {
+                responseBuffer = Buffer.concat([responseBuffer, data]);
+
+                // Wait until we have enough bytes to read the length
+                if (responseBuffer.length < 3) return;
+
+                // Find packet header
+                const headerIndex = responseBuffer.indexOf(
+                    Buffer.from([0x00, 0x00])
+                );
+
+                if (headerIndex === -1) {
+                    responseBuffer = Buffer.alloc(0);
+                    return;
+                }
+
+                responseBuffer = responseBuffer.subarray(headerIndex);
+
+                if (responseBuffer.length < 3) return;
+
+                // Total response length = length field + 3
+                const expectedLength = responseBuffer[2] + 3;
+
+                if (responseBuffer.length < expectedLength) return;
+
+                const response = responseBuffer.subarray(0, expectedLength);
+
+                cleanup();
+                resolve(response);
+            };
+
+            const timeout = setTimeout(() => {
+                cleanup();
+                reject(new Error("Timed out waiting for amplifier response."));
+            }, 2000);
+
+            AmpBuilder.port.on("data", onData);
+        });
+
+        // Send query
         await this.sendCommand(packet);
+
+        // Wait for response
+        const response = await responsePromise;
+
+        console.log("Amplifier response:", response.toString("hex"));
+
+        // Validate minimum packet size
+        if (response.length < 6) {
+            throw new Error("Response packet is too short.");
+        }
+
+        // Validate command
+        if (response[4] !== 0x02) {
+            throw new Error("Unexpected response command.");
+        }
+
+        // Validate length
+        if (response.length !== response[2] + 3) {
+            throw new Error("Invalid response length.");
+        }
+
+        // Validate checksum
+        let checksum = 0;
+
+        for (let i = 2; i < response.length - 1; i++) {
+            checksum ^= response[i];
+        }
+
+        if (checksum !== response[response.length - 1]) {
+            throw new Error("Invalid response checksum.");
+        }
+
+        // Parse telemetry
+        // TODO: Add byte offsets and scaling from manufacturer's documentation.
+
+        const telemetry = {
+            currents: [],
+            voltage: null,
+            temperature: null,
+            faults: [],
+            rawResponse: response
+        };
+
+        return telemetry;
     }
 
     async getFaults(){
         // 0x08 (maybe?)
-        const packet = await this.buildCommand(0x08); 
-        
+        //const packet = await this.buildCommand(0x08); 
+        const packet = Buffer.from([
+            0x00,
+            0x00,
+            0x03,
+            0x00,
+            0x08,
+            0x0B
+        ]);
+
         await this.sendCommand(packet);
+
+        // STILL NEED TO GET AND PARSE RESPONSE
     }
 
     // PLACEHOLDER
